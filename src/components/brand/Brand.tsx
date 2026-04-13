@@ -11,7 +11,7 @@ type BrandProps = {
 };
 
 /**
- * Leaf mark (`/leaf-brand.png`) stacked above ProMassage + CL&AC, centered.
+ * Leaf mark (`/Leaf-brand2.png`, transparent) stacked above ProMassage + CL&AC, centered.
  */
 export default function Brand({
   className,
@@ -52,10 +52,10 @@ export default function Brand({
         .join(" ")}
     >
       <Image
-        src="/leaf-brand2.png"
+        src="/Leaf-brand2.png"
         alt=""
-        width={200}
-        height={200}
+        width={1052}
+        height={1008}
         className={leafClass}
         sizes={
           hero
