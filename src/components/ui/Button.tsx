@@ -22,7 +22,7 @@ export default function Button({
   fullWidth = false,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center font-medium tracking-wide transition-all duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2";
+    "inline-flex items-center justify-center font-medium tracking-wide transition-all duration-200 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2";
 
   const variants = {
     primary:

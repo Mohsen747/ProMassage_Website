@@ -1,3 +1,7 @@
+/** JaneApp booking — used for massage booking and academy enrollment until separate URLs exist. */
+const ONLINE_BOOKING_URL =
+  "https://gubenchiropractic.janeapp.com/#/staff_member/5" as const;
+
 export const siteContent = {
   brand: "ProMassage",
   /**
@@ -13,16 +17,78 @@ export const siteContent = {
     secondary: "View Services",
     final: "Book Your Appointment",
     mobile: "Book Now",
-    bookingUrl:
-      "https://gubenchiropractic.janeapp.com/#/staff_member/5",
+    bookingUrl: ONLINE_BOOKING_URL,
+    /** In-site enrollment landing page; JaneApp is linked from that page. */
+    enrollUrl: "/enroll",
+  },
+  enroll: {
+    meta: {
+      title: "Enroll | ProMassage Academy",
+      description:
+        "Start your enrollment at ProMassage Clinic & Academy. Learn how to register for courses, view the academy hub, and complete your application online.",
+    },
+    hero: {
+      title: "Enroll at ProMassage Academy",
+      intro:
+        "Take the next step toward your training goals. Review academy programs and schedules, then complete enrollment through our secure online desk.",
+    },
+    points: [
+      "Explore courses, schedule, and certification paths from the Academy section.",
+      "When you are ready, continue to our online enrollment desk to register or reserve your spot.",
+      "Questions before you enroll? Use Contact and we will help you choose the right path.",
+    ],
+    ctaOnline: "Continue to online enrollment",
+    ctaAcademy: "Browse Academy",
+  },
+  courses: {
+    meta: {
+      title: "Courses | ProMassage Academy",
+      description:
+        "Massage therapy and professional training courses at ProMassage Clinic & Academy in Kirkland — structure, focus areas, and how to enroll.",
+    },
+    hero: {
+      title: "Academy courses",
+      intro:
+        "ProMassage Academy offers focused training built around therapeutic technique, client care, and professional practice. Programs combine structured learning with practical application so you can grow with confidence.",
+    },
+    pillars: [
+      {
+        title: "Foundations first",
+        text: "Core coursework covers anatomy, safe practice, assessment basics, and the principles behind therapeutic massage so every advanced topic has a solid base.",
+      },
+      {
+        title: "Hands-on application",
+        text: "Labs and supervised practice sessions translate theory into touch: pacing, pressure, draping, communication, and adapting techniques to real client needs.",
+      },
+      {
+        title: "Professional readiness",
+        text: "Expectations around ethics, boundaries, documentation, and clinic flow are woven in so graduates are prepared for structured, respectful client work.",
+      },
+    ],
+    note: "Detailed course titles, term dates, hours, and prerequisites will be published here as each intake is confirmed. Until then, use Schedule for timing questions or Enroll to hold your place.",
+    ctaEnroll: "Enroll now",
+    ctaSchedule: "View schedule",
+    ctaContact: "Ask a question",
   },
   nav: {
-    links: [
-      { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
-      { label: "About", href: "/about" },
-      { label: "Contact", href: "/contact" },
-    ],
+    academy: {
+      sectionLabel: "Academy",
+      sectionHref: "/academy",
+      links: [
+        { label: "Courses", href: "/academy/courses" },
+        { label: "Schedule", href: "/academy/schedule" },
+        { label: "Certification", href: "/academy/certification" },
+      ],
+      enrollLabel: "Enroll Now",
+    },
+    clinic: {
+      links: [
+        { label: "Massage Services", href: "/services" },
+        { label: "Pricing", href: "/pricing" },
+        { label: "About", href: "/about" },
+        { label: "Contact", href: "/contact" },
+      ],
+    },
   },
   home: {
     meta: {
@@ -181,8 +247,6 @@ export const siteContent = {
       title: "Get in touch",
       location: "Kirkland, Quebec",
       booking: "Online through JaneApp",
-      phone: "[Insert phone number]",
-      email: "[Insert email]",
     },
     formIntro:
       "Use the form below if you have a question before booking. For the fastest way to reserve your appointment, please use the online booking link.",

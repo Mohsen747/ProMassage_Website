@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Brand } from "@/components/brand";
 import { siteContent } from "@/data/siteContent";
 
 const { hero } = siteContent.home;
@@ -25,7 +24,7 @@ const HERO_BOTTOM_FEATHER =
 export default function Hero() {
   return (
     <section
-      className="relative isolate flex min-h-svh w-full flex-col items-center justify-center overflow-hidden bg-brand-50"
+      className="relative isolate -mt-[5.25rem] flex min-h-svh w-full flex-col items-center justify-center overflow-hidden bg-brand-50 pt-[5.25rem] md:-mt-[6rem] md:pt-[6rem]"
       aria-labelledby="hero-heading"
     >
       {/* Photo: zoomed crop on action, dimmed + warm, light blur for softer background */}
@@ -50,12 +49,7 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-32 pt-24 text-center sm:px-6 md:pb-40 md:pt-28 lg:px-8">
-        <Brand
-          tone="onDark"
-          size="hero"
-          className="mb-6 sm:mb-8"
-        />
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-32 pt-28 text-center sm:px-6 md:pb-40 md:pt-32 lg:px-8">
         <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/75">
           Kirkland, Quebec
         </p>
@@ -69,13 +63,13 @@ export default function Hero() {
         <div className="mb-12 flex w-full max-w-lg flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
           <Link
             href={siteContent.ctas.bookingUrl}
-            className="inline-flex min-h-[3.25rem] w-full items-center justify-center border border-transparent bg-brand-spa px-10 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-brand-spaDark sm:w-auto sm:min-w-[14rem]"
+            className="inline-flex min-h-[3.25rem] w-full items-center justify-center rounded-md border border-transparent bg-brand-spa px-10 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-brand-spaDark sm:w-auto sm:min-w-[14rem]"
           >
             {hero.primaryCta}
           </Link>
           <Link
             href="/services"
-            className="inline-flex min-h-[3.25rem] w-full items-center justify-center border border-white bg-transparent px-10 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-white/10 sm:w-auto sm:min-w-[14rem]"
+            className="inline-flex min-h-[3.25rem] w-full items-center justify-center rounded-md border border-white bg-transparent px-10 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-white/10 sm:w-auto sm:min-w-[14rem]"
           >
             {hero.secondaryCta}
           </Link>

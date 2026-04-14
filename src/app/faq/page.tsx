@@ -46,7 +46,7 @@ export default function FaqPage() {
           </p>
           <Link
             href={siteContent.ctas.bookingUrl}
-            className="inline-flex items-center justify-center px-10 py-4 bg-white text-brand-800 font-medium rounded-sm hover:bg-brand-50 transition-colors duration-200 text-base"
+            className="inline-flex items-center justify-center px-10 py-4 bg-white text-brand-800 font-medium rounded-md hover:bg-brand-50 transition-colors duration-200 text-base"
           >
             {siteContent.ctas.primary}
           </Link>

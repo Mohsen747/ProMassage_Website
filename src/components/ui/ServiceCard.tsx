@@ -97,7 +97,7 @@ export default function ServiceCard({
 
           <Link
             href={siteContent.ctas.bookingUrl}
-            className="inline-flex items-center justify-center rounded-sm bg-brand-600 px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-brand-700"
+            className="inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-brand-700"
           >
             {service.cta}
           </Link>

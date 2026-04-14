@@ -1,27 +1,27 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Brand } from "@/components/brand";
 import { siteContent } from "@/data/siteContent";
 
-function telHref(phone: string) {
-  const digits = phone.replace(/\D/g, "");
-  return digits.length >= 10 ? `tel:${phone.replace(/[^\d+]/g, "") || digits}` : "#";
-}
-
-function mailHref(email: string) {
-  return email.includes("@") ? `mailto:${email}` : "#";
-}
-
 /** Default booking CTA (inner pages + home scrolled). */
 const navCtaDefaultClass =
-  "rounded-sm bg-brand-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors duration-200 hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-2";
+  "rounded-md bg-brand-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors duration-200 hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-2";
 
-/** Home hero overlay — Scandinave-style: square, muted teal, all-caps. */
+/** Home hero — teal CTA, rounded corners. */
 const navCtaHomeClass =
-  "rounded-none bg-brand-spa px-8 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-brand-spaDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-2";
+  "rounded-md bg-brand-spa px-8 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-brand-spaDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-2";
+
+/** Tighter Book / Enroll for single-row transparent header (fits with all links). */
+const navCtaHomeBarClass =
+  "rounded-md bg-brand-spa px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-white transition-colors duration-200 hover:bg-brand-spaDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-2 sm:px-4 sm:text-[11px] sm:tracking-[0.18em]";
+
+/** Leaf only — centered between Academy and Massage columns (desktop). */
+const navLeafClass =
+  "h-10 w-auto max-h-[2.75rem] shrink-0 object-contain sm:h-11 sm:max-h-[3rem] md:h-12 md:max-h-[3.25rem]";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -49,106 +49,40 @@ export default function Navbar() {
 
   const overlayNav = isHome && !navSolid;
 
-  const linkBase = [
-    "transition-colors duration-150 rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-    isHome
-      ? "text-[11px] font-semibold uppercase tracking-[0.16em]"
-      : "text-sm font-medium",
-  ].join(" ");
+  /** Desktop top row (home + inner pages): same compact caps as home hero. */
+  const linkBarBase =
+    "text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors duration-150 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
 
-  const linkInactive = overlayNav
+  const linkBarInactive = overlayNav
     ? "text-white/80 hover:text-white focus-visible:ring-white/60 focus-visible:ring-offset-transparent"
     : "text-stone-600 hover:text-stone-900 focus-visible:ring-brand-500 focus-visible:ring-offset-brand-50";
 
-  const linkActive = overlayNav
-    ? "text-white"
-    : "text-brand-700";
+  const linkBarActive = overlayNav ? "text-white" : "text-brand-700";
 
   const navCtaClass = isHome ? navCtaHomeClass : navCtaDefaultClass;
+  /** Top bar Enroll + Book — teal rounded, all routes (matches home). */
+  const headerBarCtaClass = navCtaHomeBarClass;
+
+  const { academy, clinic } = siteContent.nav;
+  const academySectionActive =
+    pathname === academy.sectionHref || pathname.startsWith(`${academy.sectionHref}/`);
 
   return (
     <>
-      <div
-        className={`left-0 right-0 z-50 w-full ${
-          isHome ? "absolute top-0" : "sticky top-0"
-        }`}
-      >
-        {isHome && (
-          <div
-            className={`border-b transition-colors duration-300 ${
-              overlayNav
-                ? "border-white/10 bg-black/20 py-2.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur-md"
-                : "border-brand-200 bg-brand-50/95 py-2 text-xs font-medium text-stone-600"
-            }`}
-          >
-            <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-1 px-4 sm:justify-end sm:px-6 lg:px-8">
-              <a
-                href={telHref(siteContent.contact.info.phone)}
-                className={overlayNav ? "hover:text-white" : "hover:text-stone-900"}
-              >
-                {siteContent.contact.info.phone}
-              </a>
-              <a
-                href={mailHref(siteContent.contact.info.email)}
-                className={overlayNav ? "hover:text-white" : "hover:text-stone-900"}
-              >
-                {siteContent.contact.info.email}
-              </a>
-            </div>
-          </div>
-        )}
-
+      <div className="fixed left-0 right-0 top-0 z-50 w-full">
         <header
-          className={`transition-[background-color,border-color,box-shadow] duration-300 ${
+          className={`overflow-x-auto overflow-y-visible transition-[background-color,border-color,box-shadow] duration-300 ${
             overlayNav
-              ? "border-b border-transparent bg-transparent"
+              ? "border-b border-transparent bg-transparent shadow-none"
               : "border-b border-brand-200 bg-brand-50/95 shadow-sm backdrop-blur-sm supports-[backdrop-filter]:bg-brand-50/90"
           }`}
         >
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className={`flex items-center justify-between ${isHome ? "h-[4.25rem]" : "h-16"}`}>
-              <Link
-                href="/"
-                className={`flex shrink-0 items-center rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
-                  overlayNav
-                    ? "focus-visible:ring-white/70 focus-visible:ring-offset-transparent"
-                    : "focus-visible:ring-brand-500 focus-visible:ring-offset-brand-50"
-                }`}
-                aria-label="ProMassage CL&AC — home"
-              >
-                <Brand
-                  tone={isHome && overlayNav ? "onDark" : "default"}
-                  className="max-h-[3.25rem] w-auto max-w-[6.5rem] shrink-0 sm:max-h-[3.5rem] sm:max-w-[7rem] md:max-h-16 md:max-w-[7.5rem]"
-                />
-              </Link>
-
-              <nav className={`hidden items-center md:flex ${isHome ? "gap-10" : "gap-8"}`}>
-                {siteContent.nav.links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`${linkBase} ${
-                      pathname === link.href ? linkActive : linkInactive
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <Link
-                  href={siteContent.ctas.bookingUrl}
-                  className={`${navCtaClass} ${
-                    overlayNav
-                      ? "focus-visible:ring-offset-transparent"
-                      : "focus-visible:ring-offset-brand-50"
-                  }`}
-                >
-                  {siteContent.ctas.primary}
-                </Link>
-              </nav>
-
+          <div className="mx-auto w-full max-w-7xl px-3 sm:px-5 lg:px-8 xl:max-w-[90rem]">
+            <div className="flex items-center justify-between gap-2 py-1 md:hidden">
               <button
+                type="button"
                 onClick={() => setMenuOpen(!menuOpen)}
-                className={`rounded-sm p-2 transition-colors md:hidden ${
+                className={`shrink-0 rounded-md p-2 transition-colors ${
                   overlayNav
                     ? "text-white hover:bg-white/10"
                     : "text-stone-600 hover:bg-stone-100 hover:text-stone-900"
@@ -160,18 +94,172 @@ export default function Navbar() {
                 <span className="mb-1.5 block h-px w-5 bg-current" />
                 <span className="block h-px w-5 bg-current" />
               </button>
+              <div className="flex min-w-0 shrink-0 gap-1.5 sm:gap-2">
+                <Link
+                  href={siteContent.ctas.enrollUrl}
+                  className={`${headerBarCtaClass} shrink-0 whitespace-nowrap ${
+                    overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-50"
+                  }`}
+                >
+                  {academy.enrollLabel}
+                </Link>
+                <Link
+                  href={siteContent.ctas.bookingUrl}
+                  className={`${headerBarCtaClass} shrink-0 whitespace-nowrap ${
+                    overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-50"
+                  }`}
+                >
+                  {siteContent.ctas.primary}
+                </Link>
+              </div>
+            </div>
+
+            {/*
+              Desktop: one grid so column 1 / 3 widths match the wordmark rule segments; left nav
+              ends at the inner edge of the left line, right nav starts at the inner edge of the right line.
+            */}
+            {/*
+              `content-start` avoids stretching rows when the grid is taller than content (was
+              forcing a huge gap between “ProMassage” and “Clinic & Academy”). Row 1 keeps a stable
+              tap height via min-h on the three cells only.
+            */}
+            <div className="hidden w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] grid-rows-[auto_auto_auto] content-start items-center gap-x-0 gap-y-0 py-1 pb-1.5 md:grid [&::-webkit-scrollbar]:h-0 [&::-webkit-scrollbar]:w-0">
+              <nav
+                className="col-start-1 row-start-1 flex min-h-[2.75rem] min-w-0 flex-nowrap items-center justify-end gap-1.5 overflow-x-auto overflow-y-visible md:gap-2 lg:gap-2.5 [&::-webkit-scrollbar]:h-0 [&::-webkit-scrollbar]:w-0"
+                aria-label="Academy"
+              >
+                <Link
+                  href={siteContent.ctas.enrollUrl}
+                  className={`${headerBarCtaClass} shrink-0 whitespace-nowrap ${
+                    overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-50"
+                  }`}
+                >
+                  {academy.enrollLabel}
+                </Link>
+                <Link
+                  href={academy.sectionHref}
+                  className={`${linkBarBase} shrink-0 whitespace-nowrap ${
+                    academySectionActive ? linkBarActive : linkBarInactive
+                  }`}
+                >
+                  {academy.sectionLabel}
+                </Link>
+                {academy.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`${linkBarBase} shrink-0 whitespace-nowrap ${
+                      pathname === link.href ? linkBarActive : linkBarInactive
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+              <Link
+                href="/"
+                className={`col-start-2 row-start-1 flex min-h-[2.75rem] shrink-0 items-center justify-self-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                  overlayNav
+                    ? "focus-visible:ring-white/70 focus-visible:ring-offset-transparent"
+                    : "focus-visible:ring-brand-500 focus-visible:ring-offset-brand-50"
+                }`}
+                aria-label="ProMassage — home"
+              >
+                <Image
+                  src="/Leaf-brand2.png"
+                  alt=""
+                  width={1052}
+                  height={1008}
+                  className={navLeafClass}
+                  sizes="(max-width: 768px) 128px, 160px"
+                  priority
+                />
+              </Link>
+              <nav
+                className="col-start-3 row-start-1 flex min-h-[2.75rem] min-w-0 flex-nowrap items-center justify-start gap-1.5 overflow-x-auto overflow-y-visible md:gap-2 lg:gap-2.5 [&::-webkit-scrollbar]:h-0 [&::-webkit-scrollbar]:w-0"
+                aria-label="Massage clinic"
+              >
+                {clinic.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`${linkBarBase} shrink-0 whitespace-nowrap ${
+                      pathname === link.href ? linkBarActive : linkBarInactive
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <Link
+                  href={siteContent.ctas.bookingUrl}
+                  className={`${headerBarCtaClass} shrink-0 whitespace-nowrap ${
+                    overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-50"
+                  }`}
+                >
+                  {siteContent.ctas.primary}
+                </Link>
+              </nav>
+              <Brand
+                tone={overlayNav ? "onDark" : "default"}
+                variant="headerCenter"
+                wideTitleRule
+                navGridAlign
+              />
+            </div>
+
+            <div className="pb-1 pt-0 md:hidden">
+              <Link
+                href="/"
+                className={`block focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                  overlayNav
+                    ? "focus-visible:ring-white/70 focus-visible:ring-offset-transparent"
+                    : "focus-visible:ring-brand-500 focus-visible:ring-offset-brand-50"
+                }`}
+                aria-label="ProMassage Clinic & Academy — home"
+              >
+                <Brand
+                  tone={overlayNav ? "onDark" : "default"}
+                  variant="headerCenter"
+                  wideTitleRule
+                />
+              </Link>
             </div>
           </div>
 
           {menuOpen && (
             <div className="border-t border-brand-200 bg-brand-50 px-4 pb-4 pt-2 md:hidden">
               <nav className="flex flex-col gap-1">
-                {siteContent.nav.links.map((link) => (
+                <p className="px-2 pt-1 text-[10px] font-semibold uppercase tracking-widest text-stone-500">
+                  Academy
+                </p>
+                <Link
+                  href={siteContent.ctas.enrollUrl}
+                  onClick={() => setMenuOpen(false)}
+                  className={`${navCtaClass} mx-2 mb-1 mt-1 block text-center focus-visible:ring-offset-brand-50`}
+                >
+                  {academy.enrollLabel}
+                </Link>
+                <Link
+                  href={academy.sectionHref}
+                  onClick={() => setMenuOpen(false)}
+                  className={`rounded-md px-2 py-2 transition-colors ${
+                    isHome
+                      ? "text-[11px] font-semibold uppercase tracking-[0.14em]"
+                      : "text-sm font-medium"
+                  } ${
+                    academySectionActive
+                      ? "bg-brand-100 text-brand-800"
+                      : "text-stone-700 hover:bg-stone-100 hover:text-stone-900"
+                  }`}
+                >
+                  {academy.sectionLabel}
+                </Link>
+                {academy.links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`rounded px-2 py-2 transition-colors ${
+                    className={`rounded-md px-2 py-2 transition-colors ${
                       isHome
                         ? "text-[11px] font-semibold uppercase tracking-[0.14em]"
                         : "text-sm font-medium"
@@ -184,13 +272,36 @@ export default function Navbar() {
                     {link.label}
                   </Link>
                 ))}
-                <Link
-                  href={siteContent.ctas.bookingUrl}
-                  onClick={() => setMenuOpen(false)}
-                  className={`${navCtaClass} mt-2 block text-center focus-visible:ring-offset-brand-50`}
-                >
-                  {siteContent.ctas.primary}
-                </Link>
+                <p className="mt-3 px-2 text-[10px] font-semibold uppercase tracking-widest text-stone-500">
+                  Massage
+                </p>
+                {clinic.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`rounded-md px-2 py-2 transition-colors ${
+                      isHome
+                        ? "text-[11px] font-semibold uppercase tracking-[0.14em]"
+                        : "text-sm font-medium"
+                    } ${
+                      pathname === link.href
+                        ? "bg-brand-100 text-brand-800"
+                        : "text-stone-700 hover:bg-stone-100 hover:text-stone-900"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="mt-3 flex flex-col gap-2">
+                  <Link
+                    href={siteContent.ctas.bookingUrl}
+                    onClick={() => setMenuOpen(false)}
+                    className={`${navCtaClass} block text-center focus-visible:ring-offset-brand-50`}
+                  >
+                    {siteContent.ctas.primary}
+                  </Link>
+                </div>
               </nav>
             </div>
           )}
@@ -198,7 +309,7 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`fixed bottom-0 left-0 right-0 z-50 border-t md:hidden ${
+        className={`fixed bottom-0 left-0 right-0 z-50 overflow-hidden rounded-t-md border-t md:hidden ${
           isHome
             ? "border-white/15 bg-brand-spa"
             : "border-brand-800/20 bg-brand-600"

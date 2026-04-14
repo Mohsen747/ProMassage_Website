@@ -19,7 +19,7 @@ export default function FaqAccordion({ faqs }: FaqAccordionProps) {
             <dt>
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
-                className="flex w-full items-start justify-between gap-4 text-left"
+                className="flex w-full items-start justify-between gap-4 rounded-md py-1 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
                 aria-expanded={isOpen}
               >
                 <span className="font-medium text-stone-900 text-base leading-snug">

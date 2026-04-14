@@ -15,7 +15,7 @@ export default function FinalCta() {
         </p>
         <Link
           href={siteContent.ctas.bookingUrl}
-          className="inline-flex items-center justify-center px-10 py-4 bg-white text-brand-800 font-medium rounded-sm hover:bg-brand-50 transition-colors duration-200 text-base mb-4"
+          className="inline-flex items-center justify-center px-10 py-4 bg-white text-brand-800 font-medium rounded-md hover:bg-brand-50 transition-colors duration-200 text-base mb-4"
         >
           {finalCta.cta}
         </Link>

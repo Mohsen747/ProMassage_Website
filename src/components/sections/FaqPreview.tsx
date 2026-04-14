@@ -17,7 +17,7 @@ export default function FaqPreview() {
             </p>
             <Link
               href="/faq"
-              className="inline-flex items-center justify-center px-6 py-3 border border-brand-600 text-brand-700 font-medium rounded-sm hover:bg-brand-50 transition-colors duration-200"
+              className="inline-flex items-center justify-center px-6 py-3 border border-brand-600 text-brand-700 font-medium rounded-md hover:bg-brand-50 transition-colors duration-200"
             >
               {faqPreview.cta}
             </Link>

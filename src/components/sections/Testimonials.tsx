@@ -34,7 +34,7 @@ export default function Testimonials() {
         <div className="mt-12 text-center">
           <Link
             href={siteContent.ctas.bookingUrl}
-            className="inline-flex items-center justify-center px-8 py-4 bg-brand-600 text-white font-medium rounded-sm hover:bg-brand-700 transition-colors duration-200"
+            className="inline-flex items-center justify-center px-8 py-4 bg-brand-600 text-white font-medium rounded-md hover:bg-brand-700 transition-colors duration-200"
           >
             {siteContent.ctas.primary}
           </Link>

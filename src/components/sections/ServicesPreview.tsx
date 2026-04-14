@@ -27,7 +27,7 @@ export default function ServicesPreview() {
         <div className="mt-12 text-center">
           <Link
             href="/services"
-            className="inline-flex items-center justify-center px-6 py-3 border border-brand-600 text-brand-700 font-medium rounded-sm hover:bg-brand-50 transition-colors duration-200"
+            className="inline-flex items-center justify-center px-6 py-3 border border-brand-600 text-brand-700 font-medium rounded-md hover:bg-brand-50 transition-colors duration-200"
           >
             {servicesPreview.cta}
           </Link>

@@ -22,7 +22,28 @@ export default function Footer() {
               Navigation
             </p>
             <nav className="flex flex-col gap-2">
-              {siteContent.nav.links.map((link) => (
+              <Link
+                href={siteContent.nav.academy.sectionHref}
+                className="text-sm text-stone-400 hover:text-white transition-colors duration-150"
+              >
+                {siteContent.nav.academy.sectionLabel}
+              </Link>
+              {siteContent.nav.academy.links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-stone-400 hover:text-white transition-colors duration-150"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href={siteContent.ctas.enrollUrl}
+                className="text-sm text-brand-300 hover:text-brand-200 transition-colors duration-150"
+              >
+                {siteContent.nav.academy.enrollLabel}
+              </Link>
+              {siteContent.nav.clinic.links.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -35,7 +56,7 @@ export default function Footer() {
                 href={siteContent.ctas.bookingUrl}
                 className="text-sm text-brand-300 hover:text-brand-200 transition-colors duration-150"
               >
-                Book Now
+                {siteContent.ctas.primary}
               </Link>
             </nav>
           </div>
@@ -50,7 +71,7 @@ export default function Footer() {
               <span>{siteContent.footer.contact.booking}</span>
               <Link
                 href={siteContent.ctas.bookingUrl}
-                className="mt-2 inline-flex items-center justify-center px-5 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-sm hover:bg-brand-700 transition-colors duration-200 w-fit"
+                className="mt-2 inline-flex items-center justify-center px-5 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-md hover:bg-brand-700 transition-colors duration-200 w-fit"
               >
                 Book Now
               </Link>

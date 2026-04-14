@@ -50,23 +50,11 @@ export default function ContactPage() {
                   </span>
                   <span className="text-stone-700 text-sm">{info.booking}</span>
                 </div>
-                <div className="flex items-start gap-3">
-                  <span className="mt-0.5 text-brand-500 text-sm select-none font-medium w-20 shrink-0">
-                    Phone
-                  </span>
-                  <span className="text-stone-700 text-sm">{info.phone}</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="mt-0.5 text-brand-500 text-sm select-none font-medium w-20 shrink-0">
-                    Email
-                  </span>
-                  <span className="text-stone-700 text-sm">{info.email}</span>
-                </div>
               </address>
 
               <Link
                 href={siteContent.ctas.bookingUrl}
-                className="inline-flex items-center justify-center px-6 py-3 bg-brand-600 text-white font-medium rounded-sm hover:bg-brand-700 transition-colors duration-200 mb-10"
+                className="inline-flex items-center justify-center px-6 py-3 bg-brand-600 text-white font-medium rounded-md hover:bg-brand-700 transition-colors duration-200 mb-10"
               >
                 {siteContent.ctas.primary}
               </Link>
