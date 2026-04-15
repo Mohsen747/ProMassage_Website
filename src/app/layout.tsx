@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { getSiteUrl } from "@/lib/siteUrl";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   },
   description:
     "Professional therapeutic massage in Kirkland focused on pain relief, tension reduction, recovery, and personalized care.",
-  metadataBase: new URL("https://promassage.ca"),
+  metadataBase: new URL(getSiteUrl()),
 };
 
 export default function RootLayout({
