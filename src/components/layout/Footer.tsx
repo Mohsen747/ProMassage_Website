@@ -6,20 +6,34 @@ export default function Footer() {
     <footer className="bg-brand-950 text-stone-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Brand */}
+          {/* Massage (clinic) */}
           <div>
-            <p className="font-serif text-lg text-white mb-3">
-              {siteContent.brand}
+            <p className="text-lg font-bold uppercase tracking-widest text-stone-500 mb-4">
+              Massage
             </p>
-            <p className="text-sm leading-relaxed text-stone-400">
-              {siteContent.footer.text}
-            </p>
+            <nav className="flex flex-col gap-2">
+              {siteContent.nav.clinic.links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-stone-400 hover:text-white transition-colors duration-150"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href={siteContent.ctas.bookingUrl}
+                className="text-sm text-brand-300 hover:text-brand-200 transition-colors duration-150"
+              >
+                {siteContent.ctas.primary}
+              </Link>
+            </nav>
           </div>
 
-          {/* Links */}
+          {/* Academy */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-500 mb-4">
-              Navigation
+            <p className="text-lg font-bold uppercase tracking-widest text-stone-500 mb-4">
+              {siteContent.nav.academy.sectionLabel}
             </p>
             <nav className="flex flex-col gap-2">
               <Link
@@ -43,27 +57,12 @@ export default function Footer() {
               >
                 {siteContent.nav.academy.enrollLabel}
               </Link>
-              {siteContent.nav.clinic.links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-stone-400 hover:text-white transition-colors duration-150"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link
-                href={siteContent.ctas.bookingUrl}
-                className="text-sm text-brand-300 hover:text-brand-200 transition-colors duration-150"
-              >
-                {siteContent.ctas.primary}
-              </Link>
             </nav>
           </div>
 
           {/* Contact */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-500 mb-4">
+            <p className="text-lg font-bold uppercase tracking-widest text-stone-500 mb-4">
               Contact
             </p>
             <address className="not-italic flex flex-col gap-2 text-sm text-stone-400">
@@ -80,7 +79,15 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-brand-800 text-center text-xs text-stone-600">
-          &copy; {new Date().getFullYear()} {siteContent.brand}. All rights reserved.
+          &copy; {new Date().getFullYear()} · {siteContent.footer.attribution.creditLeadIn}{" "}
+          <a
+            href={siteContent.footer.attribution.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-stone-500 hover:text-stone-400 underline-offset-2 hover:underline transition-colors"
+          >
+            {siteContent.footer.attribution.label}
+          </a>
         </div>
       </div>
     </footer>

@@ -97,10 +97,13 @@ export const siteContent = {
         "Professional therapeutic massage in Kirkland focused on pain relief, tension reduction, recovery, and personalized care. Book your session with ProMassage today.",
     },
     hero: {
-      title: "Relieve Pain. Recover Faster.",
+      /** Shown in the mobile nav wordmark; hero eyebrow is hidden on small screens to avoid duplication. */
+      locationLine: "Kirkland, Quebec",
+      title: "Relieve Pain & Recover Faster",
       primaryCta: "Book Now — Feel Better Today",
       secondaryCta: "View Services",
       trustLine: "Professional care. Personalized sessions. Easy online booking.",
+      /** Landscape source. Optional `backgroundImageVertical` (portrait URL) is supported in Hero for viewports below `sm`. */
       backgroundImage: "/hero.png",
     },
     problemSolution: {
@@ -263,7 +266,11 @@ export const siteContent = {
     },
   },
   footer: {
-    text: "Professional therapeutic massage focused on relief, recovery, and personalized care in Kirkland.",
+    attribution: {
+      creditLeadIn: "All designed by",
+      label: "donya Innovation",
+      href: "https://mohsen-pajoohesh.com",
+    },
     contact: {
       location: "Kirkland, Quebec",
       booking: "Online Booking Available",

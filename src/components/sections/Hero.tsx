@@ -1,14 +1,27 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { siteContent } from "@/data/siteContent";
 
 const { hero } = siteContent.home;
 
-/** Tighter crop + focal bias toward hands / oil; tune % if art moves. */
-const HERO_IMAGE_BG = {
-  backgroundImage: `url(${hero.backgroundImage})`,
+type HeroContent = typeof hero & { backgroundImageVertical?: string };
+const heroCfg = hero as HeroContent;
+
+/** Landscape crop — `sm` and up (tablet / desktop). */
+const HERO_IMAGE_DESKTOP: CSSProperties = {
+  backgroundImage: `url(${heroCfg.backgroundImage})`,
   backgroundSize: "138%",
   backgroundPosition: "30% 44%",
-  backgroundRepeat: "no-repeat" as const,
+  backgroundRepeat: "no-repeat",
+  filter: "brightness(0.84) sepia(0.14) saturate(1.06)",
+};
+
+/** Portrait / tall framing — below `sm` (phones). Uses `backgroundImageVertical` when set, else main image with `cover`. */
+const HERO_IMAGE_MOBILE: CSSProperties = {
+  backgroundImage: `url(${heroCfg.backgroundImageVertical ?? heroCfg.backgroundImage})`,
+  backgroundSize: "cover",
+  backgroundPosition: "50% 42%",
+  backgroundRepeat: "no-repeat",
   filter: "brightness(0.84) sepia(0.14) saturate(1.06)",
 };
 
@@ -27,10 +40,15 @@ export default function Hero() {
       className="relative isolate -mt-[5.25rem] flex min-h-svh w-full flex-col items-center justify-center overflow-hidden bg-brand-50 pt-[5.25rem] md:-mt-[6rem] md:pt-[6rem]"
       aria-labelledby="hero-heading"
     >
-      {/* Photo: zoomed crop on action, dimmed + warm, light blur for softer background */}
+      {/* Photo: portrait-oriented below `sm`, landscape crop from `sm` up */}
       <div
-        className="absolute inset-0 blur-[1px]"
-        style={HERO_IMAGE_BG}
+        className="absolute inset-0 blur-[1px] sm:hidden"
+        style={HERO_IMAGE_MOBILE}
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 hidden blur-[1px] sm:block"
+        style={HERO_IMAGE_DESKTOP}
         aria-hidden
       />
       {/* Edge vignette — pulls attention to center / hands, quiets corners */}
@@ -50,9 +68,11 @@ export default function Hero() {
       />
 
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-4 pb-32 pt-28 text-center sm:px-6 md:pb-40 md:pt-32 lg:px-8">
-        <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/75">
-          Kirkland, Quebec
-        </p>
+        {hero.locationLine ? (
+          <p className="mb-5 hidden text-[10px] font-semibold uppercase tracking-[0.22em] text-white/75 md:block">
+            {hero.locationLine}
+          </p>
+        ) : null}
         <h1
           id="hero-heading"
           className="mb-10 max-w-[20ch] font-serif text-[28px] font-normal leading-[1.15] text-white sm:max-w-[22ch] sm:text-4xl sm:leading-[1.12] md:max-w-[24ch] md:text-5xl md:leading-[1.1] lg:text-6xl"

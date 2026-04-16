@@ -20,7 +20,7 @@ type BrandProps = {
   wideTitleRule?: boolean;
   /**
    * When used inside the navbar’s 3-column desktop grid, children use explicit grid placement so
-   * the rule segments line up with the Academy / Massage columns (same as `minmax(0,1fr)_auto_minmax(0,1fr)`).
+   * the rule segments line up with the Massage / Academy columns (same as `minmax(0,1fr)_auto_minmax(0,1fr)`).
    */
   navGridAlign?: boolean;
 };
