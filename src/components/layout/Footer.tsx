@@ -1,92 +1,95 @@
-import Link from "next/link";
-import { siteContent } from "@/data/siteContent";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { siteConfig } from "@/config/site";
+import { navPaths } from "@/config/nav";
 
-export default function Footer() {
+export default async function Footer() {
+  const tNav = await getTranslations("nav");
+  const tFooter = await getTranslations("footer");
+  const tCta = await getTranslations("ctas");
+
   return (
     <footer className="bg-brand-950 text-stone-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Massage (clinic) */}
           <div>
             <p className="text-lg font-bold uppercase tracking-widest text-stone-500 mb-4">
-              Massage
+              {tFooter("massageHeading")}
             </p>
             <nav className="flex flex-col gap-2">
-              {siteContent.nav.clinic.links.map((link) => (
+              {navPaths.clinic.links.map(({ href, labelKey }) => (
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  key={href}
+                  href={href}
                   className="text-sm text-stone-400 hover:text-white transition-colors duration-150"
                 >
-                  {link.label}
+                  {tNav(`clinic.${labelKey}`)}
                 </Link>
               ))}
-              <Link
-                href={siteContent.ctas.bookingUrl}
+              <a
+                href={siteConfig.ctas.bookingUrl}
                 className="text-sm text-brand-300 hover:text-brand-200 transition-colors duration-150"
               >
-                {siteContent.ctas.primary}
-              </Link>
+                {tCta("primary")}
+              </a>
             </nav>
           </div>
 
-          {/* Academy */}
           <div>
             <p className="text-lg font-bold uppercase tracking-widest text-stone-500 mb-4">
-              {siteContent.nav.academy.sectionLabel}
+              {tNav("academy.sectionLabel")}
             </p>
             <nav className="flex flex-col gap-2">
               <Link
-                href={siteContent.nav.academy.sectionHref}
+                href={navPaths.academy.sectionHref}
                 className="text-sm text-stone-400 hover:text-white transition-colors duration-150"
               >
-                {siteContent.nav.academy.sectionLabel}
+                {tNav("academy.sectionLabel")}
               </Link>
-              {siteContent.nav.academy.links.map((link) => (
+              {navPaths.academy.links.map(({ href, labelKey }) => (
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  key={href}
+                  href={href}
                   className="text-sm text-stone-400 hover:text-white transition-colors duration-150"
                 >
-                  {link.label}
+                  {tNav(`academy.links.${labelKey}`)}
                 </Link>
               ))}
               <Link
-                href={siteContent.ctas.enrollUrl}
+                href={siteConfig.ctas.enrollPath}
                 className="text-sm text-brand-300 hover:text-brand-200 transition-colors duration-150"
               >
-                {siteContent.nav.academy.enrollLabel}
+                {tNav("academy.enrollLabel")}
               </Link>
             </nav>
           </div>
 
-          {/* Contact */}
           <div>
             <p className="text-lg font-bold uppercase tracking-widest text-stone-500 mb-4">
-              Contact
+              {tFooter("contactHeading")}
             </p>
             <address className="not-italic flex flex-col gap-2 text-sm text-stone-400">
-              <span>{siteContent.footer.contact.location}</span>
-              <span>{siteContent.footer.contact.booking}</span>
-              <Link
-                href={siteContent.ctas.bookingUrl}
+              <span>{tFooter("location")}</span>
+              <span>{tFooter("bookingLine")}</span>
+              <a
+                href={siteConfig.ctas.bookingUrl}
                 className="mt-2 inline-flex items-center justify-center px-5 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-md hover:bg-brand-700 transition-colors duration-200 w-fit"
               >
-                Book Now
-              </Link>
+                {tFooter("bookNow")}
+              </a>
             </address>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-brand-800 text-center text-xs text-stone-600">
-          &copy; {new Date().getFullYear()} · {siteContent.footer.attribution.creditLeadIn}{" "}
+          &copy; {new Date().getFullYear()} · {tFooter("attributionLeadIn")}{" "}
           <a
-            href={siteContent.footer.attribution.href}
+            href="https://mohsen-pajoohesh.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-stone-500 hover:text-stone-400 underline-offset-2 hover:underline transition-colors"
           >
-            {siteContent.footer.attribution.label}
+            {tFooter("attributionLabel")}
           </a>
         </div>
       </div>

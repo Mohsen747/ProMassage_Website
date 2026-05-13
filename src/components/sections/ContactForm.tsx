@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function ContactForm() {
+  const t = useTranslations("contactForm");
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -13,12 +15,8 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="bg-brand-50 border border-brand-200 rounded-sm p-8 text-center">
-        <p className="text-brand-800 font-medium text-lg mb-2">
-          Message received
-        </p>
-        <p className="text-stone-600 text-sm">
-          Thank you for reaching out. We will be in touch shortly.
-        </p>
+        <p className="text-brand-800 font-medium text-lg mb-2">{t("submittedTitle")}</p>
+        <p className="text-stone-600 text-sm">{t("submittedBody")}</p>
       </div>
     );
   }
@@ -26,11 +24,8 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
       <div>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-stone-700 mb-1.5"
-        >
-          Full Name <span className="text-brand-600">*</span>
+        <label htmlFor="name" className="block text-sm font-medium text-stone-700 mb-1.5">
+          {t("nameLabel")} <span className="text-brand-600">*</span>
         </label>
         <input
           id="name"
@@ -39,16 +34,13 @@ export default function ContactForm() {
           required
           autoComplete="name"
           className="w-full px-4 py-3 bg-white border border-stone-300 rounded-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition"
-          placeholder="Your full name"
+          placeholder={t("namePlaceholder")}
         />
       </div>
 
       <div>
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-stone-700 mb-1.5"
-        >
-          Email <span className="text-brand-600">*</span>
+        <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1.5">
+          {t("emailLabel")} <span className="text-brand-600">*</span>
         </label>
         <input
           id="email"
@@ -57,16 +49,13 @@ export default function ContactForm() {
           required
           autoComplete="email"
           className="w-full px-4 py-3 bg-white border border-stone-300 rounded-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition"
-          placeholder="your@email.com"
+          placeholder={t("emailPlaceholder")}
         />
       </div>
 
       <div>
-        <label
-          htmlFor="phone"
-          className="block text-sm font-medium text-stone-700 mb-1.5"
-        >
-          Phone
+        <label htmlFor="phone" className="block text-sm font-medium text-stone-700 mb-1.5">
+          {t("phoneLabel")}
         </label>
         <input
           id="phone"
@@ -74,16 +63,13 @@ export default function ContactForm() {
           type="tel"
           autoComplete="tel"
           className="w-full px-4 py-3 bg-white border border-stone-300 rounded-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition"
-          placeholder="(514) 000-0000"
+          placeholder={t("phonePlaceholder")}
         />
       </div>
 
       <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-medium text-stone-700 mb-1.5"
-        >
-          Message <span className="text-brand-600">*</span>
+        <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-1.5">
+          {t("messageLabel")} <span className="text-brand-600">*</span>
         </label>
         <textarea
           id="message"
@@ -91,7 +77,7 @@ export default function ContactForm() {
           required
           rows={5}
           className="w-full px-4 py-3 bg-white border border-stone-300 rounded-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition resize-none"
-          placeholder="How can we help you?"
+          placeholder={t("messagePlaceholder")}
         />
       </div>
 
@@ -99,7 +85,7 @@ export default function ContactForm() {
         type="submit"
         className="w-full py-3.5 bg-brand-600 text-white font-medium rounded-md hover:bg-brand-700 transition-colors duration-200"
       >
-        Send Message
+        {t("submit")}
       </button>
     </form>
   );

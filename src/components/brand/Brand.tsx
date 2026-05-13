@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 type BrandProps = {
   className?: string;
@@ -40,6 +41,8 @@ export default function Brand({
   wideTitleRule = false,
   navGridAlign = false,
 }: BrandProps) {
+  const t = useTranslations("brand");
+  const subtitle = t("subtitle");
   const onDark = tone === "onDark";
   const hero = size === "hero";
   const headerCenter = variant === "headerCenter";
@@ -99,18 +102,18 @@ export default function Brand({
     return (
       <>
         <div
-          className={`col-start-1 row-start-2 h-px min-h-px w-full self-center ${lineClass}`}
+          className={`col-start-1 row-start-2 z-0 h-px min-h-px w-full self-center ${lineClass}`}
           aria-hidden
         />
         <Link
           href="/"
-          className={`col-start-2 row-start-2 justify-self-center leading-none ${homeWordmarkLinkFocus}`}
+          className={`relative z-10 col-start-2 row-start-2 justify-self-center leading-none ${homeWordmarkLinkFocus}`}
           aria-label="ProMassage — home"
         >
           <span className={`${wideNameClass} leading-none`}>ProMassage</span>
         </Link>
         <div
-          className={`col-start-3 row-start-2 h-px min-h-px w-full self-center ${lineClass}`}
+          className={`col-start-3 row-start-2 z-0 h-px min-h-px w-full self-center ${lineClass}`}
           aria-hidden
         />
         <Link
@@ -123,7 +126,7 @@ export default function Brand({
             .join(" ")}
           aria-label="ProMassage Clinic & Academy — home"
         >
-          <span className={wideSubTightClass}>Clinic &amp; Academy</span>
+          <span className={wideSubTightClass}>{subtitle}</span>
         </Link>
       </>
     );
@@ -144,7 +147,7 @@ export default function Brand({
           <span className={`${wideNameClass} leading-none`}>ProMassage</span>
           <div className={`h-px min-h-px flex-1 ${lineClass}`} aria-hidden />
         </div>
-        <span className={wideSubTightClass}>Clinic &amp; Academy</span>
+        <span className={wideSubTightClass}>{subtitle}</span>
       </div>
     );
   }
@@ -178,7 +181,7 @@ export default function Brand({
       ) : null}
       <div className={hero ? "flex flex-col items-center gap-1" : "flex flex-col items-center gap-0.5"}>
         <span className={nameClass}>ProMassage</span>
-        <span className={subClass}>Clinic &amp; Academy</span>
+        <span className={subClass}>{subtitle}</span>
       </div>
     </div>
   );
