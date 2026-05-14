@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { navPaths } from "@/config/nav";
 
@@ -36,12 +37,9 @@ export default async function AcademyPage() {
           </li>
         ))}
       </ul>
-      <Link
-        href={siteConfig.ctas.enrollPath}
-        className="mt-10 inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
-      >
+      <Button href={siteConfig.ctas.enrollPath} variant="primaryBold" className="mt-10">
         {tNav("academy.enrollLabel")}
-      </Link>
+      </Button>
     </section>
   );
 }

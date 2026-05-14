@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Link as LocalizedLink } from "@/i18n/navigation";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { getServicesList } from "@/data/services";
 import ServiceCard from "@/components/ui/ServiceCard";
@@ -27,27 +27,18 @@ export default async function PricingPage() {
       <h1 className="mb-4 font-serif text-4xl text-stone-900 sm:text-5xl">{t("title")}</h1>
       <p className="mb-4 text-lg leading-relaxed text-stone-600">
         {t("intro")}{" "}
-        <LocalizedLink
-          href="/services"
-          className="font-medium text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800"
-        >
+        <Button href="/services" variant="linkUnderlined" className="text-lg">
           {t("introLink")}
-        </LocalizedLink>
+        </Button>
         {t("introSuffix")}
       </p>
       <div className="mb-10 flex flex-wrap gap-4">
-        <a
-          href={siteConfig.ctas.bookingUrl}
-          className="inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
-        >
+        <Button href={siteConfig.ctas.bookingUrl} variant="primaryBold">
           {tCta("primary")}
-        </a>
-        <LocalizedLink
-          href="/services"
-          className="inline-flex items-center justify-center rounded-md border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-800 transition-colors hover:bg-stone-50"
-        >
+        </Button>
+        <Button href="/services" variant="outlineStone">
           {t("massageServicesCta")}
-        </LocalizedLink>
+        </Button>
       </div>
 
       <h2 className="mb-6 font-sans text-sm font-bold uppercase tracking-wide text-stone-900">

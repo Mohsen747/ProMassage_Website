@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import Button from "@/components/ui/Button";
 
 export default async function FaqPreview() {
   const t = await getTranslations("home");
@@ -15,12 +16,9 @@ export default async function FaqPreview() {
               {t("faqPreview.title")}
             </h2>
             <p className="text-stone-600 leading-relaxed mb-8">{t("faqPreview.text")}</p>
-            <Link
-              href="/faq"
-              className="inline-flex items-center justify-center px-6 py-3 border border-brand-600 text-brand-700 font-medium rounded-md hover:bg-brand-50 transition-colors duration-200"
-            >
+            <Button href="/faq" variant="outlineBrand">
               {t("faqPreview.cta")}
-            </Link>
+            </Button>
           </div>
 
           <ul className="space-y-3">

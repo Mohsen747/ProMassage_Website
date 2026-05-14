@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import Button from "@/components/ui/Button";
 
 export default function ContactForm() {
   const t = useTranslations("contactForm");
@@ -81,12 +82,9 @@ export default function ContactForm() {
         />
       </div>
 
-      <button
-        type="submit"
-        className="w-full py-3.5 bg-brand-600 text-white font-medium rounded-md hover:bg-brand-700 transition-colors duration-200"
-      >
+      <Button type="submit" variant="primary" size="block">
         {t("submit")}
-      </button>
+      </Button>
     </form>
   );
 }

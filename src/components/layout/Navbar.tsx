@@ -7,19 +7,8 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { Brand } from "@/components/brand";
 import { siteConfig } from "@/config/site";
 import { navPaths } from "@/config/nav";
-import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
-
-/** Default booking CTA (inner pages + home scrolled). */
-const navCtaDefaultClass =
-  "rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-200 ease-out hover:scale-[1.03] hover:bg-brand-700 hover:shadow-lg active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-2";
-
-/** Home hero — teal CTA, rounded corners. */
-const navCtaHomeClass =
-  "rounded-xl bg-brand-spa px-8 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-sm transition-all duration-200 ease-out hover:scale-[1.03] hover:bg-brand-spaDark hover:shadow-lg active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-2";
-
-/** Tighter Book / Enroll for single-row transparent header (fits with all links). */
-const navCtaHomeBarClass =
-  "inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-xl bg-brand-spa px-2 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-white shadow-sm transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-spaDark hover:shadow-lg hover:ring-2 hover:ring-white/35 active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 focus-visible:ring-offset-2 sm:px-3 sm:text-[11px] sm:tracking-[0.18em]";
+import SiteTopBar from "@/components/layout/SiteTopBar";
+import Button from "@/components/ui/Button";
 
 /** Leaf only — centered between Massage and Academy columns (desktop). */
 const navLeafClass =
@@ -74,8 +63,8 @@ export default function Navbar() {
     ? "text-white hover:bg-white/25 hover:shadow-md"
     : "text-brand-700 hover:bg-brand-200/80 hover:text-brand-950 hover:shadow-md";
 
-  const navCtaClass = isHome ? navCtaHomeClass : navCtaDefaultClass;
-  const headerBarCtaClass = navCtaHomeBarClass;
+  const mobileDrawerCtaVariant = isHome ? "navPillSpa" : "navPill";
+  const headerBarFocus = overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-100";
 
   const academySectionHref = navPaths.academy.sectionHref;
   const academySectionActive =
@@ -87,6 +76,7 @@ export default function Navbar() {
   return (
     <>
       <div className="fixed left-0 right-0 top-0 z-[60] w-full">
+        <SiteTopBar overlayNav={overlayNav} />
         <header
           className={`overflow-x-clip overflow-y-visible transition-[background-color,border-color,box-shadow] duration-300 sm:overflow-x-visible ${
             overlayNav
@@ -112,23 +102,20 @@ export default function Navbar() {
                 <span className="block h-px w-5 bg-current" />
               </button>
               <div className="flex min-h-0 min-w-0 shrink-0 items-stretch gap-1.5 sm:gap-2">
-                <LocaleSwitcher overlayNav={overlayNav} />
-                <a
+                <Button
                   href={bookingHref}
-                  className={`${headerBarCtaClass} shrink-0 whitespace-nowrap ${
-                    overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-100"
-                  }`}
+                  variant="navBarSpa"
+                  className={`shrink-0 whitespace-nowrap ${headerBarFocus}`}
                 >
                   {tCta("primary")}
-                </a>
-                <Link
+                </Button>
+                <Button
                   href={enrollHref}
-                  className={`${headerBarCtaClass} shrink-0 whitespace-nowrap ${
-                    overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-100"
-                  }`}
+                  variant="navBarSpa"
+                  className={`shrink-0 whitespace-nowrap ${headerBarFocus}`}
                 >
                   {tNav("academy.enrollLabel")}
-                </Link>
+                </Button>
               </div>
             </div>
 
@@ -137,14 +124,13 @@ export default function Navbar() {
                 className="col-start-1 row-start-1 flex min-h-[2.75rem] w-full min-w-0 max-w-full flex-nowrap items-center justify-end gap-1 overflow-x-auto overflow-y-visible pr-1 md:gap-1.5 md:pr-2 lg:gap-2 [&::-webkit-scrollbar]:h-0 [&::-webkit-scrollbar]:w-0"
                 aria-label={tCommon("navMassageClinic")}
               >
-                <a
+                <Button
                   href={bookingHref}
-                  className={`${headerBarCtaClass} shrink-0 whitespace-nowrap ${
-                    overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-100"
-                  }`}
+                  variant="navBarSpa"
+                  className={`shrink-0 whitespace-nowrap ${headerBarFocus}`}
                 >
                   {tCta("primary")}
-                </a>
+                </Button>
                 {navPaths.clinic.links.map(({ href, labelKey }) => (
                   <Link
                     key={href}
@@ -177,7 +163,6 @@ export default function Navbar() {
                     priority
                   />
                 </Link>
-                <LocaleSwitcher overlayNav={overlayNav} />
               </div>
               <nav
                 className="col-start-3 row-start-1 flex min-h-[2.75rem] w-full min-w-0 max-w-full flex-nowrap items-center justify-start gap-1 overflow-x-auto overflow-y-visible pl-1 md:gap-1.5 md:pl-2 lg:gap-2 [&::-webkit-scrollbar]:h-0 [&::-webkit-scrollbar]:w-0"
@@ -202,14 +187,13 @@ export default function Navbar() {
                     {tNav(`academy.links.${labelKey}`)}
                   </Link>
                 ))}
-                <Link
+                <Button
                   href={enrollHref}
-                  className={`${headerBarCtaClass} shrink-0 whitespace-nowrap ${
-                    overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-100"
-                  }`}
+                  variant="navBarSpa"
+                  className={`shrink-0 whitespace-nowrap ${headerBarFocus}`}
                 >
                   {tNav("academy.enrollLabel")}
-                </Link>
+                </Button>
               </nav>
               <Brand
                 tone={overlayNav ? "onDark" : "default"}
@@ -251,26 +235,24 @@ export default function Navbar() {
         className={`fixed bottom-0 left-0 z-[55] flex w-[min(100vw,20rem)] max-w-[85vw] flex-col overflow-hidden rounded-r-3xl border-y border-r border-white/50 border-l-0 bg-white/25 shadow-2xl shadow-black/10 backdrop-blur-2xl supports-[backdrop-filter]:bg-white/18 transition-transform duration-300 ease-out md:hidden ${
           menuOpen ? "translate-x-0" : "-translate-x-full pointer-events-none"
         }`}
-        style={{ top: "5.25rem" }}
+        style={{ top: "7.25rem" }}
         role="dialog"
         aria-modal={menuOpen}
         aria-hidden={!menuOpen}
         aria-label={tCommon("siteMenu")}
       >
-        <nav className="flex max-h-[calc(100dvh-5.25rem)] flex-col gap-1.5 overflow-y-auto px-4 pb-6 pt-3">
-          <div className="mb-2 flex justify-center px-2">
-            <LocaleSwitcher />
-          </div>
+        <nav className="flex max-h-[calc(100dvh-7.25rem)] flex-col gap-1.5 overflow-y-auto px-4 pb-6 pt-3">
           <p className="w-full px-2 pb-1 pt-1 text-center text-lg font-bold uppercase tracking-[0.14em] text-stone-800">
             {tCommon("massages")}
           </p>
-          <a
+          <Button
             href={bookingHref}
+            variant={mobileDrawerCtaVariant}
             onClick={() => setMenuOpen(false)}
-            className={`${navCtaClass} mx-2 mb-1 mt-1 block text-center focus-visible:ring-offset-transparent`}
+            className="mx-2 mb-1 mt-1 block text-center focus-visible:ring-offset-transparent"
           >
             {tCta("primary")}
-          </a>
+          </Button>
           {navPaths.clinic.links.map(({ href, labelKey }) => (
             <Link
               key={href}
@@ -325,13 +307,14 @@ export default function Navbar() {
               {tNav(`academy.links.${labelKey}`)}
             </Link>
           ))}
-          <Link
+          <Button
             href={enrollHref}
+            variant={mobileDrawerCtaVariant}
             onClick={() => setMenuOpen(false)}
-            className={`${navCtaClass} mx-2 mb-1 mt-3 block text-center focus-visible:ring-offset-transparent`}
+            className="mx-2 mb-1 mt-3 block text-center focus-visible:ring-offset-transparent"
           >
             {tNav("academy.enrollLabel")}
-          </Link>
+          </Button>
         </nav>
       </div>
     </>

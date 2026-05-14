@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import ContactForm from "@/components/sections/ContactForm";
 
@@ -63,12 +64,9 @@ export default async function ContactPage() {
                 </div>
               </address>
 
-              <a
-                href={siteConfig.ctas.bookingUrl}
-                className="inline-flex items-center justify-center px-6 py-3 bg-brand-600 text-white font-medium rounded-md hover:bg-brand-700 transition-colors duration-200 mb-10"
-              >
+              <Button href={siteConfig.ctas.bookingUrl} variant="primary" className="mb-10">
                 {tCta("primary")}
-              </a>
+              </Button>
 
               <div className="border-t border-stone-100 pt-10">
                 <p className="text-stone-500 text-sm leading-relaxed mb-6">{t("formIntro")}</p>
@@ -80,15 +78,16 @@ export default async function ContactPage() {
               <div className="bg-brand-50 border border-brand-200 rounded-sm p-8 mb-6">
                 <h2 className="font-serif text-xl text-stone-900 mb-3">{t("location.title")}</h2>
                 <p className="text-stone-600 text-sm leading-relaxed mb-6">{t("location.text")}</p>
-                <a
+                <Button
                   href="https://maps.google.com/?q=Kirkland,+Quebec"
+                  variant="linkLead"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-brand-700 text-sm font-medium hover:text-brand-900 transition-colors duration-150"
+                  className="text-sm"
                 >
                   {tCommon("getDirections")}
                   <span aria-hidden="true">&rarr;</span>
-                </a>
+                </Button>
               </div>
 
               <div className="bg-brand-50 border border-brand-100 rounded-sm p-6">

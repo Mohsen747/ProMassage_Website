@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { navPaths } from "@/config/nav";
 
@@ -45,20 +45,17 @@ export default async function EnrollPage() {
           </ul>
 
           <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
-            <a
+            <Button
               href={siteConfig.ctas.bookingUrl}
+              variant="spa"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md bg-brand-spa px-8 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-brand-spaDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-2"
             >
               {t("ctaOnline")}
-            </a>
-            <Link
-              href={navPaths.academy.sectionHref}
-              className="inline-flex items-center justify-center rounded-md border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-800 transition-colors hover:border-stone-400 hover:bg-stone-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-            >
+            </Button>
+            <Button href={navPaths.academy.sectionHref} variant="outlineStone">
               {t("ctaAcademy")}
-            </Link>
+            </Button>
           </div>
         </div>
       </section>

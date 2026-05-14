@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Service } from "@/data/services";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 
 interface ServiceCardProps {
@@ -96,12 +97,9 @@ export default async function ServiceCard({
             </div>
           </div>
 
-          <a
-            href={bookingHref}
-            className="inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-brand-700"
-          >
+          <Button href={bookingHref} variant="primary">
             {service.cta}
-          </a>
+          </Button>
         </div>
       </article>
     );

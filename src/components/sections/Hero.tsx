@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import HeroBackgroundVideo from "@/components/sections/HeroBackgroundVideo";
 
@@ -18,7 +18,7 @@ export default async function Hero() {
 
   return (
     <section
-      className="relative isolate -mt-[5.25rem] flex min-h-svh w-full flex-col overflow-hidden bg-brand-950 pt-[5.25rem] md:-mt-[6rem] md:pt-[6rem]"
+      className="relative isolate -mt-[7.25rem] flex min-h-svh w-full flex-col overflow-hidden bg-brand-950 pt-[7.25rem] md:-mt-[8rem] md:pt-[8rem]"
       aria-labelledby="hero-heading"
     >
       <HeroBackgroundVideo clips={clips} />
@@ -53,18 +53,12 @@ export default async function Hero() {
           </h1>
 
           <div className="mb-8 flex w-full max-w-lg flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-            <a
-              href={siteConfig.ctas.bookingUrl}
-              className="inline-flex min-h-[3.25rem] w-full items-center justify-center rounded-md border border-transparent bg-brand-spa px-10 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-brand-spaDark sm:w-auto sm:min-w-[14rem]"
-            >
+            <Button href={siteConfig.ctas.bookingUrl} variant="spaHero">
               {t("hero.primaryCta")}
-            </a>
-            <Link
-              href="/services"
-              className="inline-flex min-h-[3.25rem] w-full items-center justify-center rounded-md border border-white bg-transparent px-10 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:bg-white/10 sm:w-auto sm:min-w-[14rem]"
-            >
+            </Button>
+            <Button href="/services" variant="spaOutlineHero">
               {t("hero.secondaryCta")}
-            </Link>
+            </Button>
           </div>
 
           <p className="hidden max-w-md pb-2 font-sans text-sm leading-relaxed text-white/70 sm:max-w-xl md:block">

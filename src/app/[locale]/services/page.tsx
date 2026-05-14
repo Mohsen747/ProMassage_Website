@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { getServicesList } from "@/data/services";
 import ServiceCard from "@/components/ui/ServiceCard";
@@ -63,12 +64,9 @@ export default async function ServicesPage() {
           </div>
           <p className="mt-10 text-center text-sm text-stone-600">
             {tSvcPage("cantFindTime")}{" "}
-            <a
-              href={siteConfig.ctas.bookingUrl}
-              className="font-medium text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800"
-            >
+            <Button href={siteConfig.ctas.bookingUrl} variant="linkUnderlined" className="text-sm">
               {tSvcPage("seeAvailability")}
-            </a>
+            </Button>
             .
           </p>
         </div>
@@ -78,12 +76,9 @@ export default async function ServicesPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-serif text-3xl sm:text-4xl text-white mb-5">{t("closingCta.title")}</h2>
           <p className="text-brand-100 text-lg leading-relaxed mb-10">{t("closingCta.text")}</p>
-          <a
-            href={siteConfig.ctas.bookingUrl}
-            className="inline-flex items-center justify-center px-10 py-4 bg-white text-brand-800 font-medium rounded-md hover:bg-brand-50 transition-colors duration-200 text-base"
-          >
+          <Button href={siteConfig.ctas.bookingUrl} variant="inverse">
             {t("closingCta.cta")}
-          </a>
+          </Button>
         </div>
       </section>
     </>

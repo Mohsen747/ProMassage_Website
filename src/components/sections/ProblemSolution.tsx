@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 
 export default async function ProblemSolution() {
@@ -16,12 +17,9 @@ export default async function ProblemSolution() {
             </h2>
             <p className="text-stone-600 leading-relaxed mb-5">{t("problemSolution.text1")}</p>
             <p className="text-stone-600 leading-relaxed mb-8">{t("problemSolution.text2")}</p>
-            <a
-              href={siteConfig.ctas.bookingUrl}
-              className="inline-flex items-center justify-center px-6 py-3 bg-brand-600 text-white font-medium rounded-md hover:bg-brand-700 transition-colors duration-200"
-            >
+            <Button href={siteConfig.ctas.bookingUrl} variant="primary">
               {t("problemSolution.cta")}
-            </a>
+            </Button>
           </div>
 
           <div className="bg-brand-50 border border-brand-200 rounded-sm p-8">

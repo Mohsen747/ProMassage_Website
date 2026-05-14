@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import Button from "@/components/ui/Button";
 
 export default async function AboutPreview() {
   const t = await getTranslations("home");
@@ -12,13 +12,10 @@ export default async function AboutPreview() {
             {t("aboutPreview.title")}
           </h2>
           <p className="text-stone-600 leading-relaxed mb-8">{t("aboutPreview.text")}</p>
-          <Link
-            href="/about"
-            className="inline-flex items-center gap-2 text-brand-700 font-medium hover:text-brand-900 transition-colors duration-150"
-          >
+          <Button href="/about" variant="linkLead" className="text-sm">
             {t("aboutPreview.cta")}
             <span aria-hidden="true">&rarr;</span>
-          </Link>
+          </Button>
         </div>
       </div>
     </section>

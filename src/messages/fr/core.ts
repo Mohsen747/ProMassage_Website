@@ -69,6 +69,11 @@ const core = {
     homeAria: "ProMassage — accueil",
     homeAriaFull: "ProMassage Clinique et Académie — accueil",
     siteMenu: "Menu du site",
+    utilityNav: "Réseaux sociaux et langue",
+    visitFacebook: "ProMassage sur Facebook",
+    visitInstagram: "ProMassage sur Instagram",
+    inactiveSocialTileHint:
+      "Ajoutez les URL dans src/config/site.ts (SOCIAL_DEFAULTS) ou via NEXT_PUBLIC_FACEBOOK_URL / NEXT_PUBLIC_INSTAGRAM_URL.",
     scrollToContent: "Aller au contenu principal",
     commonAreasLabel: "Zones fréquemment traitées",
     faqQuestionPrefix: "Q",

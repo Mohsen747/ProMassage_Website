@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 
 export async function generateMetadata({
@@ -63,12 +64,9 @@ export default async function AboutPage() {
       <section className="bg-brand-500 text-white py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-serif text-3xl sm:text-4xl text-white mb-10">{t("cta.title")}</h2>
-          <a
-            href={siteConfig.ctas.bookingUrl}
-            className="inline-flex items-center justify-center px-10 py-4 bg-white text-brand-800 font-medium rounded-md hover:bg-brand-50 transition-colors duration-200 text-base"
-          >
+          <Button href={siteConfig.ctas.bookingUrl} variant="inverse">
             {t("cta.cta")}
-          </a>
+          </Button>
         </div>
       </section>
     </>

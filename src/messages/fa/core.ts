@@ -5,7 +5,7 @@ const core = {
       "ماساژ درمانی حرفه‌ای در کرکلند با تمرکز بر تسکین درد، کاهش تنش، بازیابی و مراقبت شخصی.",
     pricingTitle: "قیمت‌ها | پروماساژ",
     pricingDescription:
-      "نرخ جلسات و گزینه‌های ماساژ درمانی در پروماساژ، کرکلند، کبک.",
+      "نرخ جلسات و گزینه‌های ماساژ درمانی در پروماساژ، کرکلند ، کبک.",
     academyTitle: "آکادمی | پروماساژ",
     academyDescription:
       "آکادمی پروماساژ — دوره‌ها، برنامه زمانی، گواهینامه و ثبت‌نام آموزش ماساژ درمانی در کرکلند.",
@@ -38,7 +38,7 @@ const core = {
     bookNow: "رزرو نوبت",
     attributionLeadIn: "طراحی توسط",
     attributionLabel: "donya Innovation",
-    location: "کرکلند، کبک",
+    location: "کرکلند ، کبک",
     bookingLine: "رزرو آنلاین فعال است",
   },
   brand: {
@@ -48,7 +48,7 @@ const core = {
     label: "زبان",
   },
   eyebrow: {
-    kirkland: "پروماساژ — کرکلند، کبک",
+    kirkland: "پروماساژ — کرکلند ، کبک",
     clinicAcademy: "پروماساژ کلینیک و آکادمی",
   },
   common: {
@@ -69,6 +69,11 @@ const core = {
     homeAria: "پروماساژ — صفحه اصلی",
     homeAriaFull: "پروماساژ کلینیک و آکادمی — صفحه اصلی",
     siteMenu: "منوی سایت",
+    utilityNav: "شبکه‌های اجتماعی و زبان",
+    visitFacebook: "پروماساژ در فیسبوک",
+    visitInstagram: "پروماساژ در اینستاگرام",
+    inactiveSocialTileHint:
+      "آدرس صفحه‌ها را در src/config/site.ts (SOCIAL_DEFAULTS) یا متغیرهای NEXT_PUBLIC_FACEBOOK_URL و NEXT_PUBLIC_INSTAGRAM_URL قرار دهید.",
     scrollToContent: "رفتن به محتوای اصلی",
     commonAreasLabel: "نواحی رایج که روی آن‌ها کار می‌کنیم",
     faqQuestionPrefix: "س",

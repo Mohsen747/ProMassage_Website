@@ -73,7 +73,7 @@ export default async function LocaleLayout({
       <body className="bg-brand-50 text-stone-800 font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
           <Navbar />
-          <main className="pt-[5.25rem] md:pt-[6rem]">{children}</main>
+          <main className="pt-[7.25rem] md:pt-[8rem]">{children}</main>
           <Footer />
         </NextIntlClientProvider>
       </body>

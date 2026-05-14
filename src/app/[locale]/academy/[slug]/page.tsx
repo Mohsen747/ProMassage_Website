@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { navPaths } from "@/config/nav";
 
@@ -45,18 +46,12 @@ export default async function AcademySubPage({ params }: Props) {
       <h1 className="mb-6 font-serif text-4xl text-stone-900 sm:text-5xl">{t(`${slug}.heading`)}</h1>
       <p className="leading-relaxed text-stone-600">{t(`${slug}.body`)}</p>
       <div className="mt-10 flex flex-wrap gap-4">
-        <Link
-          href={siteConfig.ctas.enrollPath}
-          className="inline-flex items-center justify-center rounded-md bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
-        >
+        <Button href={siteConfig.ctas.enrollPath} variant="primaryBold">
           {tNav("academy.enrollLabel")}
-        </Link>
-        <Link
-          href="/contact"
-          className="inline-flex items-center justify-center rounded-md border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-800 transition-colors hover:bg-stone-50"
-        >
+        </Button>
+        <Button href="/contact" variant="outlineStone">
           {tCommon("contactCta")}
-        </Link>
+        </Button>
       </div>
     </section>
   );

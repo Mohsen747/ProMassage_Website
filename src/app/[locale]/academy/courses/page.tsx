@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { navPaths } from "@/config/nav";
 
@@ -54,24 +55,15 @@ export default async function AcademyCoursesPage() {
           </p>
 
           <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
-            <Link
-              href={siteConfig.ctas.enrollPath}
-              className="inline-flex items-center justify-center rounded-md bg-brand-spa px-8 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-brand-spaDark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-2"
-            >
+            <Button href={siteConfig.ctas.enrollPath} variant="spa">
               {t("ctaEnroll")}
-            </Link>
-            <Link
-              href="/academy/schedule"
-              className="inline-flex items-center justify-center rounded-md border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-800 transition-colors hover:border-stone-400 hover:bg-stone-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-            >
+            </Button>
+            <Button href="/academy/schedule" variant="outlineStone">
               {t("ctaSchedule")}
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-md border border-stone-300 px-6 py-3 text-sm font-semibold text-stone-800 transition-colors hover:border-stone-400 hover:bg-stone-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
-            >
+            </Button>
+            <Button href="/contact" variant="outlineStone">
               {t("ctaContact")}
-            </Link>
+            </Button>
           </div>
         </div>
       </section>

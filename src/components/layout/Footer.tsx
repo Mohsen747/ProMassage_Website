@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { navPaths } from "@/config/nav";
 
@@ -71,12 +72,14 @@ export default async function Footer() {
             <address className="not-italic flex flex-col gap-2 text-sm text-stone-400">
               <span>{tFooter("location")}</span>
               <span>{tFooter("bookingLine")}</span>
-              <a
+              <Button
                 href={siteConfig.ctas.bookingUrl}
-                className="mt-2 inline-flex items-center justify-center px-5 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-md hover:bg-brand-700 transition-colors duration-200 w-fit"
+                variant="primary"
+                size="compact"
+                className="mt-2 w-fit"
               >
                 {tFooter("bookNow")}
-              </a>
+              </Button>
             </address>
           </div>
         </div>

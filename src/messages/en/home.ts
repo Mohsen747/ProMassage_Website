@@ -51,6 +51,8 @@ const home = {
   },
   testimonials: {
     title: "What clients say",
+    googleAttribution: "Read more reviews on Google Maps",
+    viaGoogle: "Google review",
   },
   aboutPreview: {
     title: "Care that is calm, professional, and personalized",

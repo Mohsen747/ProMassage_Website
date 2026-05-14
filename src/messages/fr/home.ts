@@ -52,6 +52,8 @@ const home = {
   },
   testimonials: {
     title: "Ce que disent nos clients",
+    googleAttribution: "Voir plus d'avis sur Google Maps",
+    viaGoogle: "Avis Google",
   },
   aboutPreview: {
     title: "Des soins calmes, professionnels et personnalisés",
