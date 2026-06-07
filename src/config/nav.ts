@@ -3,7 +3,7 @@ export const navPaths = {
   academy: {
     sectionHref: "/academy",
     links: [
-      { href: "/academy/courses", labelKey: "courses" as const },
+      { href: "/academy/programs", labelKey: "programs" as const },
       { href: "/academy/schedule", labelKey: "schedule" as const },
       { href: "/academy/certification", labelKey: "certification" as const },
     ],

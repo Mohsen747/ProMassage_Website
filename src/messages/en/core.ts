@@ -8,7 +8,7 @@ const core = {
       "Massage therapy pricing and session options at ProMassage in Kirkland, Quebec.",
     academyTitle: "Academy | ProMassage",
     academyDescription:
-      "ProMassage Academy — courses, schedule, certification, and enrollment for massage therapy training in Kirkland.",
+      "ProMassage Academy — programs, schedule, certification, and enrollment for massage therapy training in Kirkland.",
   },
   ctas: {
     primary: "Book Now",
@@ -20,7 +20,7 @@ const core = {
       sectionLabel: "Academy",
       enrollLabel: "Enroll Now",
       links: {
-        courses: "Courses",
+        programs: "Programs",
         schedule: "Schedule",
         certification: "Certification",
       },
@@ -60,7 +60,7 @@ const core = {
     getDirections: "Get Directions",
     whatToExpect: "What to expect",
     massotherapy: "Massotherapy",
-    coursesBreadcrumb: "Courses",
+    programsBreadcrumb: "Programs",
     contactCta: "Contact",
     openMenu: "Open menu",
     closeMenu: "Close menu",

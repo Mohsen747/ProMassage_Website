@@ -18,7 +18,7 @@ const enroll = {
   ctaAcademy: "مرور آکادمی",
 } as const;
 
-const courses = {
+const programs = {
   meta: {
     title: "دوره‌ها | آکادمی پروماساژ",
     description:
@@ -47,6 +47,37 @@ const courses = {
   ctaEnroll: "همین حالا ثبت‌نام",
   ctaSchedule: "مشاهده برنامه",
   ctaContact: "پرسش بپرسید",
+  stats: {
+    totalLabel: "برنامه‌های ارائه‌شده",
+    hoursLabel: "بازه ساعات",
+    formatsLabel: "گزینه‌های فرمت",
+    totalValue: "۱۳",
+    hoursValue: "۲۰–۴۰۰ ساعت",
+    formatsValue: "فردی · نیمه‌فردی · گروهی",
+  },
+  sections: {
+    introductory: "مقدماتی",
+    professionalDiploma: "دیپلم حرفه‌ای",
+    continuingEducation: "آموزش مداوم",
+  },
+  card: {
+    theoryLabel: "نظری",
+    practicalLabel: "عملی",
+    prerequisitesLabel: "پیش‌نیازها",
+    highlightsLabel: "نکات برجسته",
+    showHighlights: "نمایش نکات",
+    hideHighlights: "پنهان کردن نکات",
+    fromPrice: "از",
+    currency: "دلار کانادا",
+    instructorLabel: "مدرس",
+    enrollButton: "ثبت‌نام",
+  },
+  cta: {
+    heading: "آماده ثبت‌نام هستید؟",
+    body: "برای بحث در مورد زمان‌بندی و قیمت با ما تماس بگیرید.",
+    enrollButton: "ثبت‌نام کنید",
+    contactButton: "پرسش بپرسید",
+  },
 } as const;
 
 const services = {
@@ -152,5 +183,5 @@ const contactForm = {
   submit: "ارسال پیام",
 } as const;
 
-const pagesMessages = { enroll, courses, services, about, contact, faqMeta, contactForm };
+const pagesMessages = { enroll, programs, services, about, contact, faqMeta, contactForm };
 export default pagesMessages;

@@ -20,7 +20,7 @@ const core = {
       sectionLabel: "آکادمی",
       enrollLabel: "ثبت‌نام",
       links: {
-        courses: "دوره‌ها",
+        programs: "دوره‌ها",
         schedule: "برنامه",
         certification: "گواهینامه",
       },
@@ -60,7 +60,7 @@ const core = {
     getDirections: "مسیریابی",
     whatToExpect: "انتظارات از ویزیت",
     massotherapy: "ماسوتراپی",
-    coursesBreadcrumb: "دوره‌ها",
+    programsBreadcrumb: "دوره‌ها",
     contactCta: "تماس",
     openMenu: "باز کردن منو",
     closeMenu: "بستن منو",

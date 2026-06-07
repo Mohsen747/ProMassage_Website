@@ -53,22 +53,23 @@ export default function Navbar() {
   const overlayNav = isHome && !navSolid;
 
   const linkBarBase =
-    "relative z-0 inline-flex min-h-[2rem] shrink-0 items-center justify-center whitespace-nowrap rounded-md px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] transition-all duration-200 ease-out will-change-transform hover:z-10 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+    "relative z-0 inline-flex min-h-[2rem] shrink-0 items-center justify-center whitespace-nowrap rounded-md px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] transition-all duration-150 ease-out will-change-transform hover:z-10 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
 
+  // Inactive: fast background flash on hover so it feels instant
   const linkBarInactive = overlayNav
-    ? "text-white/80 hover:bg-white/20 hover:text-white hover:shadow-md focus-visible:ring-white/60 focus-visible:ring-offset-transparent"
-    : "text-stone-600 hover:bg-brand-200/80 hover:text-brand-950 hover:shadow-md focus-visible:ring-brand-500 focus-visible:ring-offset-brand-100";
+    ? "text-white/80 hover:bg-white/25 hover:text-white hover:shadow-md focus-visible:ring-white/60 focus-visible:ring-offset-transparent"
+    : "text-stone-600 hover:bg-brand-200 hover:text-brand-950 hover:shadow-sm focus-visible:ring-brand-500 focus-visible:ring-offset-brand-100";
 
+  // Active: solid background + contrasting text + bottom bar indicator
   const linkBarActive = overlayNav
-    ? "text-white hover:bg-white/25 hover:shadow-md"
-    : "text-brand-700 hover:bg-brand-200/80 hover:text-brand-950 hover:shadow-md";
+    ? "bg-white/25 text-white shadow-sm after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-white after:content-[''] hover:bg-white/35 hover:shadow-md"
+    : "bg-brand-100 text-brand-800 shadow-sm after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-brand-leaf after:content-[''] hover:bg-brand-200 hover:text-brand-900 hover:shadow-md";
 
   const mobileDrawerCtaVariant = isHome ? "navPillSpa" : "navPill";
   const headerBarFocus = overlayNav ? "focus-visible:ring-offset-transparent" : "focus-visible:ring-offset-brand-100";
 
   const academySectionHref = navPaths.academy.sectionHref;
-  const academySectionActive =
-    pathname === academySectionHref || pathname.startsWith(`${academySectionHref}/`);
+  const academySectionActive = pathname === academySectionHref;
 
   const bookingHref = siteConfig.ctas.bookingUrl;
   const enrollHref = siteConfig.ctas.enrollPath;

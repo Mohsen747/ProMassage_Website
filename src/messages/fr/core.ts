@@ -20,7 +20,7 @@ const core = {
       sectionLabel: "Académie",
       enrollLabel: "S'inscrire",
       links: {
-        courses: "Cours",
+        programs: "Programmes",
         schedule: "Horaire",
         certification: "Certification",
       },
@@ -60,7 +60,7 @@ const core = {
     getDirections: "Itinéraire",
     whatToExpect: "À quoi s'attendre",
     massotherapy: "Massothérapie",
-    coursesBreadcrumb: "Cours",
+    programsBreadcrumb: "Programmes",
     contactCta: "Contact",
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",

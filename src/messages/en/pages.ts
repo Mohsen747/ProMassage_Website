@@ -2,7 +2,7 @@ const enroll = {
   meta: {
     title: "Enroll | ProMassage Academy",
     description:
-      "Start your enrollment at ProMassage Clinic & Academy. Learn how to register for courses, view the academy hub, and complete your application online.",
+      "Start your enrollment at ProMassage Clinic & Academy. Learn how to register for programs, view the academy hub, and complete your application online.",
   },
   hero: {
     title: "Enroll at ProMassage Academy",
@@ -10,7 +10,7 @@ const enroll = {
       "Take the next step toward your training goals. Review academy programs and schedules, then complete enrollment through our secure online desk.",
   },
   points: [
-    "Explore courses, schedule, and certification paths from the Academy section.",
+    "Explore programs, schedule, and certification paths from the Academy section.",
     "When you are ready, continue to our online enrollment desk to register or reserve your spot.",
     "Questions before you enroll? Use Contact and we will help you choose the right path.",
   ],
@@ -18,14 +18,14 @@ const enroll = {
   ctaAcademy: "Browse Academy",
 } as const;
 
-const courses = {
+const programs = {
   meta: {
-    title: "Courses | ProMassage Academy",
+    title: "Programs | ProMassage Academy",
     description:
-      "Massage therapy and professional training courses at ProMassage Clinic & Academy in Kirkland — structure, focus areas, and how to enroll.",
+      "Massage therapy and professional training programs at ProMassage Clinic & Academy in Kirkland — structure, focus areas, and how to enroll.",
   },
   hero: {
-    title: "Academy courses",
+    title: "Academy Programs",
     intro:
       "ProMassage Academy offers focused training built around therapeutic technique, client care, and professional practice. Programs combine structured learning with practical application so you can grow with confidence.",
   },
@@ -47,6 +47,37 @@ const courses = {
   ctaEnroll: "Enroll now",
   ctaSchedule: "View schedule",
   ctaContact: "Ask a question",
+  stats: {
+    totalLabel: "Programs offered",
+    hoursLabel: "Hours range",
+    formatsLabel: "Format options",
+    totalValue: "13",
+    hoursValue: "20–400h",
+    formatsValue: "Individual · Semi-Individual · Group",
+  },
+  sections: {
+    introductory: "Introductory",
+    professionalDiploma: "Professional Diploma",
+    continuingEducation: "Continuing Education",
+  },
+  card: {
+    theoryLabel: "Theory",
+    practicalLabel: "Practical",
+    prerequisitesLabel: "Prerequisites",
+    highlightsLabel: "Highlights",
+    showHighlights: "Show highlights",
+    hideHighlights: "Hide highlights",
+    fromPrice: "From",
+    currency: "CAD",
+    instructorLabel: "Instructor",
+    enrollButton: "Enroll Now",
+  },
+  cta: {
+    heading: "Ready to enroll?",
+    body: "Contact us to discuss scheduling and pricing.",
+    enrollButton: "Enroll Now",
+    contactButton: "Ask a Question",
+  },
 } as const;
 
 const services = {
@@ -152,5 +183,5 @@ const contactForm = {
   submit: "Send Message",
 } as const;
 
-const pagesMessages = { enroll, courses, services, about, contact, faqMeta, contactForm };
+const pagesMessages = { enroll, programs, services, about, contact, faqMeta, contactForm };
 export default pagesMessages;

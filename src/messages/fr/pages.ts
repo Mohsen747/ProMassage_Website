@@ -18,7 +18,7 @@ const enroll = {
   ctaAcademy: "Parcourir l'Académie",
 } as const;
 
-const courses = {
+const programs = {
   meta: {
     title: "Cours | ProMassage Académie",
     description:
@@ -47,6 +47,37 @@ const courses = {
   ctaEnroll: "S'inscrire maintenant",
   ctaSchedule: "Voir l'horaire",
   ctaContact: "Poser une question",
+  stats: {
+    totalLabel: "Programmes offerts",
+    hoursLabel: "Plage d'heures",
+    formatsLabel: "Options de format",
+    totalValue: "13",
+    hoursValue: "20–400h",
+    formatsValue: "Individuel · Semi-individuel · Groupe",
+  },
+  sections: {
+    introductory: "Introduction",
+    professionalDiploma: "Diplôme professionnel",
+    continuingEducation: "Formation continue",
+  },
+  card: {
+    theoryLabel: "Théorie",
+    practicalLabel: "Pratique",
+    prerequisitesLabel: "Prérequis",
+    highlightsLabel: "Points clés",
+    showHighlights: "Afficher les points clés",
+    hideHighlights: "Masquer les points clés",
+    fromPrice: "À partir de",
+    currency: "CAD",
+    instructorLabel: "Instructeur",
+    enrollButton: "S'inscrire",
+  },
+  cta: {
+    heading: "Prêt à vous inscrire ?",
+    body: "Contactez-nous pour discuter des horaires et des tarifs.",
+    enrollButton: "S'inscrire maintenant",
+    contactButton: "Poser une question",
+  },
 } as const;
 
 const services = {
@@ -152,5 +183,5 @@ const contactForm = {
   submit: "Envoyer le message",
 } as const;
 
-const pagesMessages = { enroll, courses, services, about, contact, faqMeta, contactForm };
+const pagesMessages = { enroll, programs, services, about, contact, faqMeta, contactForm };
 export default pagesMessages;
