@@ -117,8 +117,38 @@ const core = {
   },
   academyHub: {
     title: "Académie",
-    intro:
-      "Programmes, horaire et parcours de certification chez ProMassage Clinique et Académie.",
+    intro: "Programmes, horaire et parcours de certification chez ProMassage Clinique et Académie.",
+    subtitle: "Formez-vous avec intention. Pratiquez avec confiance.",
+    featureCards: {
+      programs: {
+        number: "01",
+        title: "Programmes",
+        body: "13 programmes de l'introduction au diplôme",
+      },
+      schedule: {
+        number: "02",
+        title: "Horaire",
+        body: "Cohortes flexibles tout au long de l'année",
+      },
+      certification: {
+        number: "03",
+        title: "Certification",
+        body: "Parcours de reconnaissance professionnelle",
+      },
+      arrowLabel: "En savoir plus",
+    },
+    instructor: {
+      name: "Maryam Roostaei, RMT · M.Sc. Physiologie de l'exercice",
+      bio: "Fondatrice et instructeure principale de ProMassage Académie. Massothérapeute agréée avec une maîtrise en physiologie de l'exercice.",
+    },
+    accreditation:
+      "ProMassage Académie poursuit son accréditation auprès de Collectif Santé (RMQ/AMQ). Contactez-nous pour le statut actuel.",
+    cta: {
+      heading: "Prêt à vous inscrire ?",
+      body: "Contactez-nous pour discuter des horaires et des tarifs.",
+      enrollButton: "S'inscrire maintenant",
+      contactButton: "Poser une question",
+    },
   },
   academySub: {
     schedule: {
@@ -136,6 +166,101 @@ const core = {
     breadcrumbAcademy: "Académie",
   },
   bookingVia: "En ligne via JaneApp",
+  academySchedule: {
+    meta: {
+      title: "Horaire | ProMassage Académie",
+      description: "Horaire des cours et programmes de ProMassage Académie à Kirkland.",
+    },
+    title: "Horaire",
+    subtitle: "Prochaines cohortes et horaires de cours",
+    breadcrumb: "Horaire",
+    seasons: {
+      fall: "Cohorte d'automne",
+      winter: "Cohorte d'hiver",
+      spring: "Cohorte de printemps",
+      datesTba: "Dates à confirmer",
+      joinWaitlist: "Rejoindre la liste d'attente",
+    },
+    howItWorks: {
+      heading: "Comment ça fonctionne",
+      steps: [
+        { title: "Postuler", description: "Soumettez votre intérêt et nous évaluons votre parcours." },
+        { title: "Confirmer l'inscription", description: "Discutez des horaires, du format et sécurisez votre place." },
+        { title: "Assister à l'orientation", description: "Participez à la séance d'accueil avant le début de votre session." },
+        { title: "Commencer les cours", description: "Démarrez votre programme avec théorie structurée et pratique hands-on." },
+      ],
+    },
+    waitlist: {
+      heading: "Soyez notifié à l'ouverture des inscriptions",
+      name: "Nom",
+      email: "Courriel",
+      course: "Cours souhaité",
+      coursePlaceholder: "Choisissez un cours",
+      submit: "Rejoindre la liste",
+      success: "Merci ! Nous vous contacterons bientôt.",
+      courseOptions: [
+        "Introduction à la massothérapie",
+        "Diplôme professionnel en massothérapie",
+        "Techniques de massage des tissus profonds",
+        "Massage suédois avancé",
+        "Massage sportif et récupération athlétique",
+        "Massage prénatal et postnatal",
+        "Thérapie myofasciale",
+        "Thérapie des points trigger",
+        "Drainage lymphatique manuel",
+        "Thérapie aux pierres chaudes",
+        "Thérapie craniosacrale — fondamentaux",
+        "Intégration aromathérapie et massage",
+        "Massage assis et en entreprise",
+      ],
+    },
+    cta: {
+      heading: "Prêt à réserver votre place ?",
+      body: "Contactez-nous pour discuter des horaires et des cohortes disponibles.",
+      enrollButton: "S'inscrire maintenant",
+      contactButton: "Poser une question",
+    },
+  },
+  academyCertification: {
+    meta: {
+      title: "Certification | ProMassage Académie",
+      description: "Parcours de certification et reconnaissance professionnelle à ProMassage Académie.",
+    },
+    title: "Certification",
+    subtitle: "Votre chemin vers la reconnaissance professionnelle",
+    breadcrumb: "Certification",
+    pathways: {
+      certificate: {
+        title: "Certificat de cours",
+        body: "Complétez tout cours de formation continue pour obtenir un certificat officiel.",
+      },
+      diploma: {
+        title: "Diplôme en massothérapie (400h)",
+        body: "Complétez le programme phare pour obtenir un diplôme professionnel complet.",
+      },
+      recognition: {
+        title: "Reconnaissance professionnelle",
+        body: "Parcours d'accréditation avec Collectif Santé (RMQ/AMQ) en cours.",
+      },
+    },
+    whatYouReceive: {
+      heading: "Ce que vous recevez",
+      items: [
+        "Certificat de cours ou diplôme officiel",
+        "Relevé détaillé des heures complétées",
+        "Lettre de référence de l'instructeur (sur demande)",
+        "Statut d'ancien élève de ProMassage Académie",
+      ],
+    },
+    accreditation:
+      "ProMassage Académie poursuit actuellement son accréditation auprès de Collectif Santé (RMQ/AMQ). Contactez-nous pour le statut actuel.",
+    cta: {
+      heading: "Commencez votre parcours de certification aujourd'hui",
+      body: "Inscrivez-vous à un cours et faites le premier pas vers la reconnaissance professionnelle.",
+      enrollButton: "S'inscrire maintenant",
+      contactButton: "Poser une question",
+    },
+  },
 } as const;
 
 export default core;

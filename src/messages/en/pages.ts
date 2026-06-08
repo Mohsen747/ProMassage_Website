@@ -16,6 +16,59 @@ const enroll = {
   ],
   ctaOnline: "Continue to online enrollment",
   ctaAcademy: "Browse Academy",
+  breadcrumb: "Enroll",
+  steps: [
+    {
+      number: "1",
+      title: "Browse our programs",
+      description: "Explore all 13 programs from introductory to diploma.",
+    },
+    {
+      number: "2",
+      title: "Contact us",
+      description: "Discuss your goals and find the right program.",
+    },
+    {
+      number: "3",
+      title: "Confirm enrollment",
+      description: "Secure your spot and prepare for orientation.",
+    },
+    {
+      number: "4",
+      title: "Begin learning",
+      description: "Attend orientation and start your program.",
+    },
+  ],
+  contact: {
+    heading: "Get in touch",
+    location: "Kirkland, Quebec",
+    consultation: "Book a free consultation",
+  },
+  faq: {
+    heading: "Common questions",
+    items: [
+      {
+        question: "What are the prerequisites for most courses?",
+        answer:
+          "Most continuing education courses require basic Swedish massage knowledge or equivalent experience. The introductory course is open to all.",
+      },
+      {
+        question: "How long does a course take to complete?",
+        answer:
+          "Courses range from 20h to 400h depending on the program. Most continuing education courses are completed in a few weekends.",
+      },
+      {
+        question: "Is financing or payment plans available?",
+        answer:
+          "Contact us to discuss payment options. We work with students to find a plan that fits their situation.",
+      },
+      {
+        question: "Will I receive a certificate upon completion?",
+        answer:
+          "Yes. All students who complete course requirements receive an official ProMassage Academy certificate.",
+      },
+    ],
+  },
 } as const;
 
 const programs = {
@@ -77,6 +130,10 @@ const programs = {
     body: "Contact us to discuss scheduling and pricing.",
     enrollButton: "Enroll Now",
     contactButton: "Ask a Question",
+  },
+  header: {
+    title: "Programs",
+    subtitle: "13 programs from introductory to professional diploma",
   },
 } as const;
 

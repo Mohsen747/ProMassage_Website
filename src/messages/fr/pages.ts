@@ -16,6 +16,59 @@ const enroll = {
   ],
   ctaOnline: "Continuer vers l'inscription en ligne",
   ctaAcademy: "Parcourir l'Académie",
+  breadcrumb: "S'inscrire",
+  steps: [
+    {
+      number: "1",
+      title: "Parcourez nos programmes",
+      description: "Explorez les 13 programmes de l'introduction au diplôme.",
+    },
+    {
+      number: "2",
+      title: "Contactez-nous",
+      description: "Discutez de vos objectifs et trouvez le bon programme.",
+    },
+    {
+      number: "3",
+      title: "Confirmez l'inscription",
+      description: "Sécurisez votre place et préparez-vous pour l'orientation.",
+    },
+    {
+      number: "4",
+      title: "Commencez l'apprentissage",
+      description: "Assistez à l'orientation et démarrez votre programme.",
+    },
+  ],
+  contact: {
+    heading: "Nous joindre",
+    location: "Kirkland, Québec",
+    consultation: "Réserver une consultation gratuite",
+  },
+  faq: {
+    heading: "Questions fréquentes",
+    items: [
+      {
+        question: "Quels sont les prérequis pour la plupart des cours ?",
+        answer:
+          "La plupart des cours de formation continue exigent des connaissances de base en massage suédois ou une expérience équivalente. Le cours d'introduction est ouvert à tous.",
+      },
+      {
+        question: "Combien de temps dure un cours ?",
+        answer:
+          "Les cours vont de 20h à 400h selon le programme. La plupart des cours de formation continue se complètent en quelques fins de semaine.",
+      },
+      {
+        question: "Y a-t-il du financement ou des plans de paiement disponibles ?",
+        answer:
+          "Contactez-nous pour discuter des options de paiement. Nous travaillons avec les étudiants pour trouver un plan adapté à leur situation.",
+      },
+      {
+        question: "Recevrai-je un certificat à la fin ?",
+        answer:
+          "Oui. Tous les étudiants qui satisfont aux exigences du cours reçoivent un certificat officiel de ProMassage Académie.",
+      },
+    ],
+  },
 } as const;
 
 const programs = {
@@ -77,6 +130,10 @@ const programs = {
     body: "Contactez-nous pour discuter des horaires et des tarifs.",
     enrollButton: "S'inscrire maintenant",
     contactButton: "Poser une question",
+  },
+  header: {
+    title: "Programmes",
+    subtitle: "13 programmes de l'introduction au diplôme professionnel",
   },
 } as const;
 

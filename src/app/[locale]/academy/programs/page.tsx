@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import Button from "@/components/ui/Button";
 import CourseCard from "@/components/ui/CourseCard";
+import AcademyPageHeader from "@/components/layout/AcademyPageHeader";
+import AcademySubNav from "@/components/layout/AcademySubNav";
 import { siteConfig } from "@/config/site";
-import { navPaths } from "@/config/nav";
 import {
   introductoryPrograms,
   diplomaPrograms,
@@ -25,32 +25,20 @@ export async function generateMetadata({
 
 export default async function AcademyProgramsPage() {
   const t = await getTranslations("programs");
-  const tNav = await getTranslations("nav");
   const tCommon = await getTranslations("common");
 
   return (
     <>
-      <section className="bg-brand-950 py-16 text-white md:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-brand-300">
-            <Link
-              href={navPaths.academy.sectionHref}
-              className="transition-colors hover:text-white"
-            >
-              {tNav("academy.sectionLabel")}
-            </Link>
-            <span className="text-brand-500"> / </span>
-            {tCommon("programsBreadcrumb")}
-          </p>
-          <h1 className="mb-5 font-serif text-4xl sm:text-5xl">{t("hero.title")}</h1>
-          <p className="max-w-2xl text-lg leading-relaxed text-brand-100/90">
-            {t("hero.intro")}
-          </p>
-        </div>
-      </section>
+      <AcademyPageHeader
+        title={t("header.title")}
+        subtitle={t("header.subtitle")}
+        breadcrumb={tCommon("programsBreadcrumb")}
+      />
+
+      <AcademySubNav />
 
       <section className="border-b border-stone-200 bg-white">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <dl className="grid divide-y divide-stone-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {[
               { label: t("stats.totalLabel"), value: t("stats.totalValue") },
@@ -68,8 +56,8 @@ export default async function AcademyProgramsPage() {
         </div>
       </section>
 
-      <div className="bg-stone-50 py-16 md:py-24" style={{ background: "#f7f3ea" }}>
-        <div className="mx-auto max-w-6xl space-y-20 px-4 sm:px-6 lg:px-8">
+      <div className="py-16 md:py-24" style={{ background: "#f7f3ea" }}>
+        <div className="mx-auto max-w-7xl space-y-20 px-4 sm:px-6 lg:px-8">
           <section aria-labelledby="section-introductory">
             <h2
               id="section-introductory"
