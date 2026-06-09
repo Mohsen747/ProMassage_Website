@@ -123,7 +123,7 @@ const core = {
       programs: {
         number: "۰۱",
         title: "دوره‌ها",
-        body: "۱۳ دوره از مقدماتی تا دیپلم",
+        body: "{count} دوره از مقدماتی تا دیپلم",
       },
       schedule: {
         number: "۰۲",

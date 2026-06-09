@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import Button from "@/components/ui/Button";
 import CourseCard from "@/components/ui/CourseCard";
 import AcademyPageHeader from "@/components/layout/AcademyPageHeader";
 import AcademySubNav from "@/components/layout/AcademySubNav";
 import { siteConfig } from "@/config/site";
 import {
+  getProgramStats,
   introductoryPrograms,
   diplomaPrograms,
   continuingEducationPrograms,
@@ -26,12 +27,32 @@ export async function generateMetadata({
 export default async function AcademyProgramsPage() {
   const t = await getTranslations("programs");
   const tCommon = await getTranslations("common");
+  const format = await getFormatter();
+  const stats = getProgramStats();
+
+  const statItems = [
+    {
+      label: t("stats.totalLabel"),
+      value: format.number(stats.count),
+    },
+    {
+      label: t("stats.hoursLabel"),
+      value: t("stats.hoursValue", {
+        min: format.number(stats.minHours),
+        max: format.number(stats.maxHours),
+      }),
+    },
+    {
+      label: t("stats.formatsLabel"),
+      value: t("stats.formatsValue"),
+    },
+  ];
 
   return (
     <>
       <AcademyPageHeader
         title={t("header.title")}
-        subtitle={t("header.subtitle")}
+        subtitle={t("header.subtitle", { count: format.number(stats.count) })}
         breadcrumb={tCommon("programsBreadcrumb")}
       />
 
@@ -40,11 +61,7 @@ export default async function AcademyProgramsPage() {
       <section className="border-b border-stone-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <dl className="grid divide-y divide-stone-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            {[
-              { label: t("stats.totalLabel"), value: t("stats.totalValue") },
-              { label: t("stats.hoursLabel"), value: t("stats.hoursValue") },
-              { label: t("stats.formatsLabel"), value: t("stats.formatsValue") },
-            ].map(({ label, value }) => (
+            {statItems.map(({ label, value }) => (
               <div key={label} className="px-6 py-8 text-center sm:px-8">
                 <dt className="mb-1 text-xs font-semibold uppercase tracking-widest text-stone-400">
                   {label}
@@ -65,7 +82,7 @@ export default async function AcademyProgramsPage() {
             >
               {t("sections.introductory")}
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col gap-4">
               {introductoryPrograms.map((course) => (
                 <CourseCard key={course.id} course={course} />
               ))}
@@ -79,7 +96,7 @@ export default async function AcademyProgramsPage() {
             >
               {t("sections.professionalDiploma")}
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col gap-4">
               {diplomaPrograms.map((course) => (
                 <CourseCard key={course.id} course={course} accentBorder />
               ))}
@@ -93,7 +110,7 @@ export default async function AcademyProgramsPage() {
             >
               {t("sections.continuingEducation")}
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="flex flex-col gap-4">
               {continuingEducationPrograms.map((course) => (
                 <CourseCard key={course.id} course={course} />
               ))}

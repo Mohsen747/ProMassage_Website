@@ -123,7 +123,7 @@ const core = {
       programs: {
         number: "01",
         title: "Programmes",
-        body: "13 programmes de l'introduction au diplôme",
+        body: "{count} programmes de l'introduction au diplôme",
       },
       schedule: {
         number: "02",

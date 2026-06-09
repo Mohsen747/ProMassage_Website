@@ -17,11 +17,12 @@ const enroll = {
   ctaOnline: "ادامه به ثبت‌نام آنلاین",
   ctaAcademy: "مرور آکادمی",
   breadcrumb: "ثبت‌نام",
+  stepsBrowseDescription: "{count} دوره از مقدماتی تا دیپلم را بررسی کنید.",
   steps: [
     {
       number: "۱",
       title: "دوره‌های ما را مرور کنید",
-      description: "۱۳ دوره از مقدماتی تا دیپلم را بررسی کنید.",
+      description: "دوره‌ها از مقدماتی تا دیپلم را بررسی کنید.",
     },
     {
       number: "۲",
@@ -104,14 +105,13 @@ const programs = {
     totalLabel: "برنامه‌های ارائه‌شده",
     hoursLabel: "بازه ساعات",
     formatsLabel: "گزینه‌های فرمت",
-    totalValue: "۱۳",
-    hoursValue: "۲۰–۴۰۰ ساعت",
+    hoursValue: "{min}–{max} ساعت",
     formatsValue: "فردی · نیمه‌فردی · گروهی",
   },
   sections: {
     introductory: "مقدماتی",
     professionalDiploma: "دیپلم حرفه‌ای",
-    continuingEducation: "آموزش مداوم",
+    continuingEducation: "گواهینامه",
   },
   card: {
     theoryLabel: "نظری",
@@ -133,7 +133,76 @@ const programs = {
   },
   header: {
     title: "دوره‌ها",
-    subtitle: "۱۳ دوره از مقدماتی تا دیپلم حرفه‌ای",
+    subtitle: "{count} دوره از مقدماتی تا دیپلم حرفه‌ای",
+  },
+} as const;
+
+const programDetail = {
+  meta: {
+    title: "{name} | آکادمی پروماساژ",
+  },
+  backToPrograms: "بازگشت به همه دوره‌ها",
+  highlightsHeading: "آنچه خواهید آموخت",
+  schedule: {
+    title: "جلسات پیش‌رو",
+    note: "برنامه نمونه — تاریخ‌های تأییدشده پیش از هر ورودی منتشر می‌شود.",
+    registerButton: "ثبت‌نام",
+    columns: {
+      date: "تاریخ",
+      language: "زبان",
+      days: "روزها",
+      hours: "ساعات",
+      register: "ثبت‌نام",
+    },
+    rows: [
+      {
+        date: "۲۰–۲۱ ژوئن ۲۰۲۶",
+        language: "انگلیسی",
+        days: "شنبه–یکشنبه",
+        hours: "۹:۰۰–۱۷:۳۰",
+      },
+      {
+        date: "۴–۵ ژوئیه ۲۰۲۶",
+        language: "انگلیسی–فرانسوی",
+        days: "شنبه–یکشنبه",
+        hours: "۹:۰۰–۱۷:۳۰",
+      },
+      {
+        date: "۸–۹ اوت ۲۰۲۶",
+        language: "فرانسوی",
+        days: "شنبه–یکشنبه",
+        hours: "۹:۰۰–۱۷:۳۰",
+      },
+    ],
+  },
+  accordion: {
+    heading: "اطلاعات برنامه",
+    detailsPrerequisite: "پیش‌نیاز: {value}",
+    detailsHours: "ساعات دوره: {hours} ساعت",
+    sections: [
+      { title: "جزئیات" },
+      {
+        title: "هزینه",
+        content:
+          "نرخ گروهی، نیمه‌فردی و فردی موجود است. نرخ گروهی نمایش‌داده‌شده نقطه شروع است — برای جزئیات کامل با ما تماس بگیرید.",
+      },
+      {
+        title: "روش‌های پرداخت",
+        content:
+          "انتقال الکترونیکی، کارت اعتباری و اقساط برای برنامه‌های دیپلم پذیرفته می‌شود. برای رزرو جای خود ممکن است پیش‌پرداخت لازم باشد.",
+      },
+      {
+        title: "تجهیزات",
+        content:
+          "دانشجویان باید لباس راحت مناسب کار عملی بیاورند. میز ماساژ و لوازم کلینیک در محل فراهم است.",
+      },
+    ],
+  },
+  cta: {
+    heading: "آماده ثبت‌نام در این برنامه هستید؟",
+    body: "برای تأیید تاریخ ورود و تکمیل ثبت‌نام با ما تماس بگیرید.",
+    enrollButton: "ثبت‌نام کنید",
+    contactButton: "پرسش بپرسید",
   },
 } as const;
 
@@ -240,5 +309,5 @@ const contactForm = {
   submit: "ارسال پیام",
 } as const;
 
-const pagesMessages = { enroll, programs, services, about, contact, faqMeta, contactForm };
+const pagesMessages = { enroll, programs, programDetail, services, about, contact, faqMeta, contactForm };
 export default pagesMessages;

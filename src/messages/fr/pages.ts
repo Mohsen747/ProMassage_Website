@@ -17,11 +17,13 @@ const enroll = {
   ctaOnline: "Continuer vers l'inscription en ligne",
   ctaAcademy: "Parcourir l'Académie",
   breadcrumb: "S'inscrire",
+  stepsBrowseDescription:
+    "Explorez les {count} programmes de l'introduction au diplôme.",
   steps: [
     {
       number: "1",
       title: "Parcourez nos programmes",
-      description: "Explorez les 13 programmes de l'introduction au diplôme.",
+      description: "Explorez les programmes de l'introduction au diplôme.",
     },
     {
       number: "2",
@@ -104,14 +106,13 @@ const programs = {
     totalLabel: "Programmes offerts",
     hoursLabel: "Plage d'heures",
     formatsLabel: "Options de format",
-    totalValue: "13",
-    hoursValue: "20–400h",
+    hoursValue: "{min}–{max}h",
     formatsValue: "Individuel · Semi-individuel · Groupe",
   },
   sections: {
     introductory: "Introduction",
     professionalDiploma: "Diplôme professionnel",
-    continuingEducation: "Formation continue",
+    continuingEducation: "Certificat",
   },
   card: {
     theoryLabel: "Théorie",
@@ -133,7 +134,76 @@ const programs = {
   },
   header: {
     title: "Programmes",
-    subtitle: "13 programmes de l'introduction au diplôme professionnel",
+    subtitle: "{count} programmes de l'introduction au diplôme professionnel",
+  },
+} as const;
+
+const programDetail = {
+  meta: {
+    title: "{name} | ProMassage Académie",
+  },
+  backToPrograms: "Retour à tous les programmes",
+  highlightsHeading: "Ce que vous apprendrez",
+  schedule: {
+    title: "Sessions à venir",
+    note: "Horaire indicatif — les dates confirmées seront publiées avant chaque cohorte.",
+    registerButton: "S'inscrire",
+    columns: {
+      date: "Date",
+      language: "Langue",
+      days: "Jours",
+      hours: "Heures",
+      register: "Inscription",
+    },
+    rows: [
+      {
+        date: "20–21 juin 2026",
+        language: "Anglais",
+        days: "Samedi–dimanche",
+        hours: "9 h – 17 h 30",
+      },
+      {
+        date: "4–5 juillet 2026",
+        language: "Anglais–français",
+        days: "Samedi–dimanche",
+        hours: "9 h – 17 h 30",
+      },
+      {
+        date: "8–9 août 2026",
+        language: "Français",
+        days: "Samedi–dimanche",
+        hours: "9 h – 17 h 30",
+      },
+    ],
+  },
+  accordion: {
+    heading: "Informations sur le programme",
+    detailsPrerequisite: "Prérequis : {value}",
+    detailsHours: "Heures de cours : {hours} h",
+    sections: [
+      { title: "Détails" },
+      {
+        title: "Coût",
+        content:
+          "Des tarifs groupe, semi-individuel et individuel sont disponibles. Le tarif groupe affiché est le point de départ — contactez-nous pour le détail selon votre format.",
+      },
+      {
+        title: "Modes de paiement",
+        content:
+          "Nous acceptons le virement, la carte de crédit et des plans de paiement pour les programmes diplômants. Un dépôt peut être requis pour réserver votre place.",
+      },
+      {
+        title: "Équipement",
+        content:
+          "Les étudiants doivent apporter des vêtements confortables pour la pratique. Les tables de massage et le matériel de clinique sont fournis sur place.",
+      },
+    ],
+  },
+  cta: {
+    heading: "Prêt à vous inscrire à ce programme ?",
+    body: "Contactez-nous pour confirmer votre date d'admission et finaliser l'inscription.",
+    enrollButton: "S'inscrire maintenant",
+    contactButton: "Poser une question",
   },
 } as const;
 
@@ -240,5 +310,5 @@ const contactForm = {
   submit: "Envoyer le message",
 } as const;
 
-const pagesMessages = { enroll, programs, services, about, contact, faqMeta, contactForm };
+const pagesMessages = { enroll, programs, programDetail, services, about, contact, faqMeta, contactForm };
 export default pagesMessages;

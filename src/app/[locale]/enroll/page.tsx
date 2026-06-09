@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import Button from "@/components/ui/Button";
 import AcademyPageHeader from "@/components/layout/AcademyPageHeader";
 import AcademySubNav from "@/components/layout/AcademySubNav";
 import FaqAccordion from "@/components/sections/FaqAccordion";
 import { siteConfig } from "@/config/site";
+import { getProgramStats } from "@/data/programs";
 
 export async function generateMetadata({
   params: { locale },
@@ -20,12 +21,21 @@ export async function generateMetadata({
 
 export default async function EnrollPage() {
   const t = await getTranslations("enroll");
+  const format = await getFormatter();
+  const programCount = format.number(getProgramStats().count);
 
-  const steps = t.raw("steps") as Array<{
+  const steps = (t.raw("steps") as Array<{
     number: string;
     title: string;
     description: string;
-  }>;
+  }>).map((step, index) =>
+    index === 0
+      ? {
+          ...step,
+          description: t("stepsBrowseDescription", { count: programCount }),
+        }
+      : step
+  );
 
   const faqItems = t.raw("faq.items") as Array<{
     question: string;

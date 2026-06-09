@@ -39,7 +39,7 @@ export default function AcademySubNav() {
 
   return (
     <nav
-      className="sticky z-20 border-b border-stone-200 bg-white shadow-sm"
+      className="sticky z-20 border-b border-stone-200 bg-white shadow-sm md:hidden"
       style={{ top: "7.25rem" }}
       aria-label="Academy navigation"
     >

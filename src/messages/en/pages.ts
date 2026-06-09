@@ -17,11 +17,12 @@ const enroll = {
   ctaOnline: "Continue to online enrollment",
   ctaAcademy: "Browse Academy",
   breadcrumb: "Enroll",
+  stepsBrowseDescription: "Explore all {count} programs from introductory to diploma.",
   steps: [
     {
       number: "1",
       title: "Browse our programs",
-      description: "Explore all 13 programs from introductory to diploma.",
+      description: "Explore all programs from introductory to diploma.",
     },
     {
       number: "2",
@@ -104,8 +105,7 @@ const programs = {
     totalLabel: "Programs offered",
     hoursLabel: "Hours range",
     formatsLabel: "Format options",
-    totalValue: "13",
-    hoursValue: "20–400h",
+    hoursValue: "{min}–{max}h",
     formatsValue: "Individual · Semi-Individual · Group",
   },
   sections: {
@@ -133,7 +133,76 @@ const programs = {
   },
   header: {
     title: "Programs",
-    subtitle: "13 programs from introductory to professional diploma",
+    subtitle: "{count} programs from introductory to professional diploma",
+  },
+} as const;
+
+const programDetail = {
+  meta: {
+    title: "{name} | ProMassage Academy",
+  },
+  backToPrograms: "Back to all programs",
+  highlightsHeading: "What you will learn",
+  schedule: {
+    title: "Upcoming sessions",
+    note: "Sample schedule — confirmed dates will be published before each intake.",
+    registerButton: "Register",
+    columns: {
+      date: "Date",
+      language: "Language",
+      days: "Days",
+      hours: "Hours",
+      register: "Register",
+    },
+    rows: [
+      {
+        date: "June 20–21, 2026",
+        language: "English",
+        days: "Saturday–Sunday",
+        hours: "9:00am–5:30pm",
+      },
+      {
+        date: "July 4–5, 2026",
+        language: "English–French",
+        days: "Saturday–Sunday",
+        hours: "9:00am–5:30pm",
+      },
+      {
+        date: "August 8–9, 2026",
+        language: "French",
+        days: "Saturday–Sunday",
+        hours: "9:00am–5:30pm",
+      },
+    ],
+  },
+  accordion: {
+    heading: "Program information",
+    detailsPrerequisite: "Prerequisite: {value}",
+    detailsHours: "Course hours: {hours} h",
+    sections: [
+      { title: "Details" },
+      {
+        title: "Cost",
+        content:
+          "Group, semi-individual, and individual pricing tiers are available. The group rate shown on the listing is the starting point — contact us for full pricing based on your preferred format.",
+      },
+      {
+        title: "Payment methods",
+        content:
+          "We accept e-transfer, credit card, and installment plans for diploma programs. A deposit may be required to secure your spot.",
+      },
+      {
+        title: "Equipment",
+        content:
+          "Students should bring comfortable clothing suitable for practical work. Massage tables and clinic supplies are provided on site.",
+      },
+    ],
+  },
+  cta: {
+    heading: "Ready to enroll in this program?",
+    body: "Contact us to confirm your intake date and complete registration.",
+    enrollButton: "Enroll Now",
+    contactButton: "Ask a Question",
   },
 } as const;
 
@@ -240,5 +309,5 @@ const contactForm = {
   submit: "Send Message",
 } as const;
 
-const pagesMessages = { enroll, programs, services, about, contact, faqMeta, contactForm };
+const pagesMessages = { enroll, programs, programDetail, services, about, contact, faqMeta, contactForm };
 export default pagesMessages;

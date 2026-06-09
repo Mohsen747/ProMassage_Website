@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/ui/Button";
 import AcademyPageHeader from "@/components/layout/AcademyPageHeader";
 import AcademySubNav from "@/components/layout/AcademySubNav";
 import { siteConfig } from "@/config/site";
+import { getProgramStats } from "@/data/programs";
 
 export async function generateMetadata({
   params: { locale },
@@ -20,12 +21,14 @@ export async function generateMetadata({
 
 export default async function AcademyPage() {
   const t = await getTranslations("academyHub");
+  const format = await getFormatter();
+  const programCount = format.number(getProgramStats().count);
 
   const featureCards = [
     {
       number: t("featureCards.programs.number"),
       title: t("featureCards.programs.title"),
-      body: t("featureCards.programs.body"),
+      body: t("featureCards.programs.body", { count: programCount }),
       href: "/academy/programs",
     },
     {

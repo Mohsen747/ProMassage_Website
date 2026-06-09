@@ -122,7 +122,7 @@ const core = {
       programs: {
         number: "01",
         title: "Programs",
-        body: "13 programs from introductory to diploma",
+        body: "{count} programs from introductory to diploma",
       },
       schedule: {
         number: "02",
