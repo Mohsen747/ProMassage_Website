@@ -112,7 +112,7 @@ const programs = {
   sections: {
     introductory: "Introduction",
     professionalDiploma: "Diplôme professionnel",
-    continuingEducation: "Certificat",
+    continuingEducation: "Formation continue",
   },
   card: {
     theoryLabel: "Théorie",
