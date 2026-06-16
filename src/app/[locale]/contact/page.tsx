@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Button from "@/components/ui/Button";
+import ClinicPageHeader from "@/components/layout/ClinicPageHeader";
 import { siteConfig } from "@/config/site";
 import ContactForm from "@/components/sections/ContactForm";
 
@@ -34,15 +35,11 @@ export default async function ContactPage() {
 
   return (
     <>
-      <section className="bg-brand-950 text-white py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-brand-300 text-xs font-semibold uppercase tracking-widest mb-4">
-            {tEyebrow("kirkland")}
-          </p>
-          <h1 className="font-serif text-4xl sm:text-5xl text-white mb-5">{t("hero.title")}</h1>
-          <p className="text-brand-100/90 text-lg leading-relaxed max-w-2xl">{t("hero.intro")}</p>
-        </div>
-      </section>
+      <ClinicPageHeader
+        eyebrow={tEyebrow("kirkland")}
+        title={t("hero.title")}
+        subtitle={t("hero.intro")}
+      />
 
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

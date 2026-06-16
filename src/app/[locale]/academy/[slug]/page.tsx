@@ -132,7 +132,7 @@ export default async function ProgramDetailPage({ params: { slug } }: PageProps)
             </ul>
           </section>
 
-          {/* Schedule table (mock) */}
+          {/* Schedule table */}
           <section aria-labelledby="schedule-heading">
             <h2
               id="schedule-heading"
@@ -153,15 +153,15 @@ export default async function ProgramDetailPage({ params: { slug } }: PageProps)
                 </thead>
                 <tbody className="divide-y divide-stone-100">
                   {scheduleRows.map((row) => (
-                    <tr key={row.date} className="text-stone-600 even:bg-stone-50/80">
+                    <tr key={row.language} className="text-stone-600 even:bg-stone-50/80">
                       <td className="px-4 py-3">{row.date}</td>
                       <td className="px-4 py-3">{row.language}</td>
                       <td className="px-4 py-3">{row.days}</td>
                       <td className="px-4 py-3">{row.hours}</td>
                       <td className="px-4 py-3">
                         <Link
-                          href={siteConfig.ctas.enrollPath}
-                          className="inline-flex rounded bg-brand-950 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-forest"
+                          href="/academy/schedule#waitlist-heading"
+                          className="inline-flex rounded border border-stone-300 bg-transparent px-3 py-1.5 text-xs font-medium text-stone-700 transition-colors hover:border-stone-400 hover:bg-stone-50"
                         >
                           {t("schedule.registerButton")}
                         </Link>

@@ -145,8 +145,8 @@ const programDetail = {
   highlightsHeading: "What you will learn",
   schedule: {
     title: "Upcoming sessions",
-    note: "Sample schedule — confirmed dates will be published before each intake.",
-    registerButton: "Register",
+    note: "Dates, days, and hours to be announced. Sign up to be notified when sessions are scheduled.",
+    registerButton: "Notify me",
     columns: {
       date: "Date",
       language: "Language",
@@ -156,22 +156,22 @@ const programDetail = {
     },
     rows: [
       {
-        date: "June 20–21, 2026",
+        date: "—",
         language: "English",
-        days: "Saturday–Sunday",
-        hours: "9:00am–5:30pm",
+        days: "—",
+        hours: "—",
       },
       {
-        date: "July 4–5, 2026",
+        date: "—",
         language: "English–French",
-        days: "Saturday–Sunday",
-        hours: "9:00am–5:30pm",
+        days: "—",
+        hours: "—",
       },
       {
-        date: "August 8–9, 2026",
+        date: "—",
         language: "French",
-        days: "Saturday–Sunday",
-        hours: "9:00am–5:30pm",
+        days: "—",
+        hours: "—",
       },
     ],
   },

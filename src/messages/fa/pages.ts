@@ -145,8 +145,8 @@ const programDetail = {
   highlightsHeading: "آنچه خواهید آموخت",
   schedule: {
     title: "جلسات پیش‌رو",
-    note: "برنامه نمونه — تاریخ‌های تأییدشده پیش از هر ورودی منتشر می‌شود.",
-    registerButton: "ثبت‌نام",
+    note: "تاریخ، روزها و ساعات اعلام خواهد شد. برای اطلاع از زمان‌بندی جلسات ثبت‌نام کنید.",
+    registerButton: "خبرم کن",
     columns: {
       date: "تاریخ",
       language: "زبان",
@@ -156,22 +156,22 @@ const programDetail = {
     },
     rows: [
       {
-        date: "۲۰–۲۱ ژوئن ۲۰۲۶",
+        date: "—",
         language: "انگلیسی",
-        days: "شنبه–یکشنبه",
-        hours: "۹:۰۰–۱۷:۳۰",
+        days: "—",
+        hours: "—",
       },
       {
-        date: "۴–۵ ژوئیه ۲۰۲۶",
+        date: "—",
         language: "انگلیسی–فرانسوی",
-        days: "شنبه–یکشنبه",
-        hours: "۹:۰۰–۱۷:۳۰",
+        days: "—",
+        hours: "—",
       },
       {
-        date: "۸–۹ اوت ۲۰۲۶",
+        date: "—",
         language: "فرانسوی",
-        days: "شنبه–یکشنبه",
-        hours: "۹:۰۰–۱۷:۳۰",
+        days: "—",
+        hours: "—",
       },
     ],
   },

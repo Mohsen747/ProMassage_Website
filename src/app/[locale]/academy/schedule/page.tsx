@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import AcademyPageHeader from "@/components/layout/AcademyPageHeader";
 import AcademySubNav from "@/components/layout/AcademySubNav";
 import WaitlistForm from "@/components/sections/WaitlistForm";
+import { programs } from "@/data/programs";
 import { siteConfig } from "@/config/site";
 
 export async function generateMetadata({
@@ -32,7 +33,7 @@ export default async function SchedulePage() {
     description: string;
   }>;
 
-  const courseOptions = t.raw("waitlist.courseOptions") as string[];
+  const courseOptions = programs.map((program) => program.name);
 
   return (
     <>

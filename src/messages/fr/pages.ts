@@ -146,8 +146,8 @@ const programDetail = {
   highlightsHeading: "Ce que vous apprendrez",
   schedule: {
     title: "Sessions à venir",
-    note: "Horaire indicatif — les dates confirmées seront publiées avant chaque cohorte.",
-    registerButton: "S'inscrire",
+    note: "Dates, jours et heures à confirmer. Inscrivez-vous pour être avisé lorsque les sessions seront planifiées.",
+    registerButton: "Me notifier",
     columns: {
       date: "Date",
       language: "Langue",
@@ -157,22 +157,22 @@ const programDetail = {
     },
     rows: [
       {
-        date: "20–21 juin 2026",
+        date: "—",
         language: "Anglais",
-        days: "Samedi–dimanche",
-        hours: "9 h – 17 h 30",
+        days: "—",
+        hours: "—",
       },
       {
-        date: "4–5 juillet 2026",
+        date: "—",
         language: "Anglais–français",
-        days: "Samedi–dimanche",
-        hours: "9 h – 17 h 30",
+        days: "—",
+        hours: "—",
       },
       {
-        date: "8–9 août 2026",
+        date: "—",
         language: "Français",
-        days: "Samedi–dimanche",
-        hours: "9 h – 17 h 30",
+        days: "—",
+        hours: "—",
       },
     ],
   },
