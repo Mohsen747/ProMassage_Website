@@ -6,11 +6,10 @@ import AcademyPageHeader from "@/components/layout/AcademyPageHeader";
 import AcademySubNav from "@/components/layout/AcademySubNav";
 import { siteConfig } from "@/config/site";
 import {
-  getProgramStats,
-  introductoryPrograms,
-  diplomaPrograms,
-  continuingEducationPrograms,
-} from "@/data/programs";
+  listPublicCourses,
+  getPublicCourseStats,
+  partitionByCategory,
+} from "@/modules/education/services/courseService";
 
 export async function generateMetadata({
   params: { locale },
@@ -28,7 +27,10 @@ export default async function AcademyProgramsPage() {
   const t = await getTranslations("programs");
   const tCommon = await getTranslations("common");
   const format = await getFormatter();
-  const stats = getProgramStats();
+
+  const courses = await listPublicCourses();
+  const stats = getPublicCourseStats(courses);
+  const { introductory, diploma, continuingEducation } = partitionByCategory(courses);
 
   const statItems = [
     {
@@ -83,7 +85,7 @@ export default async function AcademyProgramsPage() {
               {t("sections.introductory")}
             </h2>
             <div className="flex flex-col gap-4">
-              {introductoryPrograms.map((course) => (
+              {introductory.map((course) => (
                 <CourseCard key={course.id} course={course} />
               ))}
             </div>
@@ -97,7 +99,7 @@ export default async function AcademyProgramsPage() {
               {t("sections.professionalDiploma")}
             </h2>
             <div className="flex flex-col gap-4">
-              {diplomaPrograms.map((course) => (
+              {diploma.map((course) => (
                 <CourseCard key={course.id} course={course} accentBorder />
               ))}
             </div>
@@ -111,7 +113,7 @@ export default async function AcademyProgramsPage() {
               {t("sections.continuingEducation")}
             </h2>
             <div className="flex flex-col gap-4">
-              {continuingEducationPrograms.map((course) => (
+              {continuingEducation.map((course) => (
                 <CourseCard key={course.id} course={course} />
               ))}
             </div>
