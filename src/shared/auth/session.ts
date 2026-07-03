@@ -1,11 +1,9 @@
+import { auth } from "@/shared/auth";
 import type { AuthSession, SessionUser, UserRole } from "@/shared/auth/types";
 
 // Authorization guards used by server components, server actions, and route
 // handlers under /account and /admin. These are the ONLY sanctioned way to read
 // the current user — never trust a client-supplied role.
-//
-// SKELETON: `getServerSession()` will delegate to NextAuth's `auth()` once the
-// dependency is installed. Signatures are final.
 
 export class UnauthorizedError extends Error {
   constructor(message = "Not authenticated") {
@@ -22,8 +20,19 @@ export class ForbiddenError extends Error {
 }
 
 export async function getServerSession(): Promise<AuthSession | null> {
-  // TODO(auth): return await auth();
-  throw new Error("getServerSession not wired — install next-auth and connect authConfig");
+  const session = await auth();
+  if (!session?.user?.id) return null;
+
+  return {
+    user: {
+      id: session.user.id,
+      email: session.user.email ?? "",
+      role: session.user.role,
+      firstName: session.user.firstName,
+      lastName: session.user.lastName,
+    },
+    expires: session.expires,
+  };
 }
 
 /** Throws UnauthorizedError if not logged in; returns the session user otherwise. */

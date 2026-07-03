@@ -1,32 +1,72 @@
-import type { UserRole } from "@/shared/auth/types";
+import type { NextAuthConfig } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/shared/db/prismaClient";
+import { verifyPassword } from "@/shared/auth/password";
+import { loginSchema } from "@/modules/education/validators/studentSchema";
+import { authRoutes } from "@/shared/auth/routes";
 
-// Auth.js (NextAuth v5) configuration — SKELETON.
+// Auth.js (NextAuth v5) configuration for the SHARED student/admin system.
 //
-// Wiring this up requires: `npm i next-auth@beta @auth/prisma-adapter`.
-// Credentials provider validates email/password against the User table; the
-// `role` field is attached to the JWT/session in the callbacks below so both
-// /account and /admin can authorize from a single session.
-//
-// Kept provider-thin here so the concrete import stays out of the scaffold until
-// the dependency is installed.
+// Credentials provider requires JWT sessions (users are not persisted by the
+// provider). The Prisma adapter is wired for future OAuth/email sign-in; the
+// User.role field rides on the JWT + session via the callbacks below, so both
+// /account and /admin authorize from one session.
 
-export interface AuthConfigShape {
-  session: { strategy: "jwt" };
-  pages: { signIn: string; newUser: string };
+export const authConfig: NextAuthConfig = {
+  adapter: PrismaAdapter(prisma),
+  session: { strategy: "jwt" },
+  trustHost: true,
+  pages: {
+    signIn: authRoutes.signIn,
+    newUser: authRoutes.signUp,
+  },
+  providers: [
+    Credentials({
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      authorize: async (raw) => {
+        const parsed = loginSchema.safeParse(raw);
+        if (!parsed.success) return null;
+
+        const { email, password } = parsed.data;
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) return null;
+
+        const passwordValid = await verifyPassword(password, user.passwordHash);
+        if (!passwordValid) return null;
+
+        return {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          name: `${user.firstName} ${user.lastName}`,
+        };
+      },
+    }),
+  ],
   callbacks: {
-    // Attach role to the token on sign-in.
-    jwt: (args: { token: Record<string, unknown>; user?: { id: string; role: UserRole } }) => Promise<Record<string, unknown>>;
-    // Expose role + id on the session object.
-    session: (args: { session: Record<string, unknown>; token: Record<string, unknown> }) => Promise<Record<string, unknown>>;
-  };
-}
-
-export const authRoutes = {
-  signIn: "/login",
-  signUp: "/signup",
-  studentHome: "/account",
-  adminHome: "/admin",
-} as const;
-
-// TODO(auth): export the real NextAuth handlers once `next-auth` is installed:
-//   export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.id = user.id as string;
+        token.role = user.role;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+      }
+      return token;
+    },
+    session: async ({ session, token }) => {
+      if (session.user) {
+        session.user.id = token.id;
+        session.user.role = token.role;
+        session.user.firstName = token.firstName;
+        session.user.lastName = token.lastName;
+      }
+      return session;
+    },
+  },
+};

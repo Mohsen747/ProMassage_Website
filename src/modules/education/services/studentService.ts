@@ -1,18 +1,14 @@
 import type { Student, StudentProfile } from "@/modules/education/types/student";
 import type { ProfileUpdateInput, SignupInput } from "@/modules/education/validators/studentSchema";
 import * as studentRepository from "@/modules/education/repositories/studentRepository";
+import { hashPassword } from "@/shared/auth/password";
 import { EducationError, NotFoundError } from "@/modules/education/constants/errors";
 
 // Student account logic (shared auth signup + /account/profile + admin views).
-// Password hashing delegated to the auth layer; the plain password never reaches
-// the repository. `hashPassword` is injected to keep this service framework-free.
+// Password hashing lives in the shared auth layer; the plain password is hashed
+// here and never reaches the repository or the database in cleartext.
 
-interface RegisterArgs {
-  input: SignupInput;
-  hashPassword: (plain: string) => Promise<string>;
-}
-
-export async function registerStudent({ input, hashPassword }: RegisterArgs): Promise<Student> {
+export async function registerStudent(input: SignupInput): Promise<Student> {
   const existing = await studentRepository.findStudentByEmail(input.email);
   if (existing) throw new EducationError("Email already registered", "EMAIL_TAKEN");
 

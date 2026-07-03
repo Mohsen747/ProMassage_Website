@@ -7,22 +7,14 @@ import { runAction, type ActionResult } from "@/modules/education/server/actions
 import { requireUser } from "@/shared/auth/session";
 
 // Shared auth actions (/signup, /account/profile). Login itself is handled by
-// the Auth.js credentials provider, not a custom action.
-//
-// `hashPassword` is injected from the auth layer once next-auth is installed
-// (bcrypt/argon2). Signature is final.
+// the Auth.js credentials provider, not a custom action. Password hashing is
+// applied inside studentService via the shared auth layer.
 
 export async function signupAction(input: unknown): Promise<ActionResult<Student>> {
   return runAction({
     schema: signupSchema,
     input,
-    handler: (data) =>
-      studentService.registerStudent({
-        input: data,
-        hashPassword: async (_plain) => {
-          throw new Error("hashPassword not wired — inject from auth layer");
-        },
-      }),
+    handler: (data) => studentService.registerStudent(data),
   });
 }
 
