@@ -4,7 +4,7 @@ Status: **Scaffold delivered (no packages installed, no DB migrated).** Everythi
 below is written and reviewable; activation steps are listed at the end.
 
 Defaults chosen (override any of these — see **Open Decisions**):
-**Prisma + PostgreSQL** · **Auth.js / NextAuth v5** · **Stripe (stubbed behind an interface)**.
+**Prisma + PostgreSQL** · **Auth.js / NextAuth v5** · **Square (behind a `PaymentGateway` interface)**.
 
 ---
 
@@ -75,13 +75,13 @@ src/
       services/            # business logic (capacity, pricing, state transitions)
       server/
         actions/           # "use server" actions = the API surface per page
-        payments/          # PaymentGateway interface + StripeGateway stub
+        payments/          # PaymentGateway interface + SquareGateway
       hooks/               # client state (useCourseFilters, useEnrollmentForm)
       constants/           # labels, multipliers, typed domain errors
       __tests__/           # Vitest unit tests (enrollment, payment)
 
   app/
-    api/education/payments/webhook/route.ts   # Stripe webhook → paymentService
+    api/education/payments/webhook/route.ts   # Square webhook → paymentService
 
 e2e/enrollment.spec.ts     # Playwright — full enrollment flow
 ```
@@ -151,7 +151,7 @@ try/catch, Zod re-validation, no internal error leakage (CONTRIBUTING §11, §12
 - `e2e/enrollment.spec.ts`
 - `src/modules/clinic/README.md`
 - Updated `.eslintrc.json` (enforce `no-explicit-any`, allow `_`-prefixed unused params)
-- Updated `.env.example` (DATABASE_URL, AUTH_*, STRIPE_*)
+- Updated `.env.example` (DATABASE_URL, AUTH_*, SQUARE_*)
 
 **Not created** (deliberately — need your decisions / installs first): the
 `/account/*` and `/admin/*` **page components**, the Auth.js route handler, and
@@ -167,7 +167,7 @@ until the DB seed runs.
 |---|---|---|---|
 | 1 | **ORM + DB** | Prisma + PostgreSQL | Schema syntax; `String[]` highlights need Postgres. |
 | 2 | **Auth** | Auth.js (NextAuth v5) + Prisma adapter | `session.ts` guards + password hashing bind to this. |
-| 3 | **Payments** | Stripe, stubbed behind `PaymentGateway` | Only `stripeGateway.ts` changes when confirmed. |
+| 3 | **Payments** | Square, behind `PaymentGateway` | Implemented in `squareGateway.ts` (confirmed 2026-07-05). |
 | 4 | **Certificate PDF** | Deferred; `generateCertificatePdf` is a no-op hook | Pick provider (React-PDF / Puppeteer / DocRaptor) later. |
 | 5 | **Approve installs** | Not done (CLAUDE.md: no installs without OK) | Nothing compiles until deps are added. |
 | 6 | **`/account` & `/admin` localization** | Suggest **outside `[locale]`** (not translated) | Changes `middleware.ts` matcher + route placement. |
@@ -180,7 +180,7 @@ until the DB seed runs.
 
 ```bash
 # 1. Deps (needs your OK — none installed yet)
-npm i @prisma/client zod next-auth@beta @auth/prisma-adapter stripe
+npm i @prisma/client zod next-auth@beta @auth/prisma-adapter square
 npm i -D prisma vitest @playwright/test @vitejs/plugin-react
 
 # 2. Database
@@ -190,7 +190,7 @@ npx prisma db seed        # migrates programs.ts → Course
 
 # 3. Fill in repository/service bodies (replace the scaffold throws)
 # 4. Wire Auth.js handler + inject hashPassword into authActions/studentService
-# 5. Implement StripeGateway + test-mode keys
+# 5. Implement SquareGateway + Sandbox keys
 ```
 
 Add to `package.json` scripts: `"test": "vitest"`, `"test:e2e": "playwright test"`,

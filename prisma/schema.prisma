@@ -266,7 +266,6 @@ enum PaymentStatus {
 
 enum PaymentProvider {
   square
-  stripe
   manual
 }
 
@@ -281,7 +280,7 @@ model Payment {
   amountCents Int
   currency    String          @default("CAD")
   status      PaymentStatus   @default(pending)
-  provider    PaymentProvider @default(stripe)
+  provider    PaymentProvider @default(square)
   providerRef String? // Square order id (or provider-specific reference)
 
   createdAt DateTime @default(now())

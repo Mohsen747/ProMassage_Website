@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 // E2E for the full enrollment flow — MANDATORY for sensitive flows
-// (CONTRIBUTING.md §16). Runs against staging with Stripe in test mode.
+// (CONTRIBUTING.md §16). Runs against staging with Square in Sandbox mode.
 
 test.describe("Academy enrollment", () => {
   test.skip("visitor can enroll in a course and reach checkout", async ({ page }) => {

@@ -151,7 +151,7 @@ refactor: extract certificate service
   Pull Request.
 - No PR can be merged without passing full CI (`lint → type-check → test → build`).
 - Changes are deployed to **staging** first; minimal manual testing (especially
-  payments in Stripe test mode) is required before going to production.
+  payments in Square Sandbox mode) is required before going to production.
 
 ---
 

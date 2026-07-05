@@ -4,7 +4,7 @@ import { idSchema } from "@/shared/validators/common";
 // Payment creation / gateway callbacks. Amounts are integer cents — never floats.
 
 export const paymentStatusSchema = z.enum(["pending", "paid", "failed", "refunded"]);
-export const paymentProviderSchema = z.enum(["stripe", "manual"]);
+export const paymentProviderSchema = z.enum(["square", "manual"]);
 
 /** Start checkout for an enrollment (student-initiated). */
 export const startPaymentSchema = z.object({

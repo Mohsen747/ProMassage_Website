@@ -1,6 +1,6 @@
 // Provider-agnostic payment gateway boundary. Services depend on THIS interface,
-// never on Stripe directly — so swapping providers (or stubbing in tests) is a
-// one-line change. Concrete implementations live beside this file.
+// never on a concrete provider directly — so swapping providers (or stubbing in
+// tests) is a one-line change. The active implementation is `squareGateway.ts`.
 
 export interface CheckoutRequest {
   enrollmentId: string;
@@ -12,7 +12,7 @@ export interface CheckoutRequest {
 }
 
 export interface CheckoutResult {
-  /** Provider-side reference (e.g. Stripe Checkout Session id). */
+  /** Provider-side reference (e.g. Square order id). */
   providerRef: string;
   /** URL to redirect the student to in order to pay. */
   redirectUrl: string;
