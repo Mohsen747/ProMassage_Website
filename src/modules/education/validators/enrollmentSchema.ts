@@ -17,7 +17,7 @@ export const enrollmentFormSchema = z.object({
   pricingTier: pricingTierSchema.default("group"),
   notes: z.string().trim().max(1000).optional(),
   acceptTerms: z.literal(true, {
-    errorMap: () => ({ message: "You must accept the terms to enroll" }),
+    error: () => "You must accept the terms to enroll",
   }),
 });
 
