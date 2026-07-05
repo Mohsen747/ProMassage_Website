@@ -1,6 +1,6 @@
 export type PaymentStatus = "pending" | "paid" | "failed" | "refunded";
 
-export type PaymentProvider = "stripe" | "manual";
+export type PaymentProvider = "square" | "stripe" | "manual";
 
 export interface Payment {
   id: string;

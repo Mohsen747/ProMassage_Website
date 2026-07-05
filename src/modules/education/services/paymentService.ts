@@ -2,7 +2,7 @@ import type { Payment } from "@/modules/education/types/payment";
 import type { ManualPaymentInput, StartPaymentInput } from "@/modules/education/validators/paymentSchema";
 import * as paymentRepository from "@/modules/education/repositories/paymentRepository";
 import * as enrollmentRepository from "@/modules/education/repositories/enrollmentRepository";
-import { getPaymentGateway } from "@/modules/education/server/payments/stripeGateway";
+import { getPaymentGateway } from "@/modules/education/server/payments/squareGateway";
 import type { WebhookVerification } from "@/modules/education/server/payments/paymentGateway";
 import { DEFAULT_CURRENCY } from "@/modules/education/constants";
 import { NotFoundError, PaymentError } from "@/modules/education/constants/errors";
@@ -44,7 +44,7 @@ export async function startCheckout({
     studentId: enrollment.studentId,
     amountCents: enrollment.amountDueCents,
     currency: DEFAULT_CURRENCY,
-    provider: "stripe",
+    provider: "square",
     providerRef: checkout.providerRef,
     status: "pending",
   });

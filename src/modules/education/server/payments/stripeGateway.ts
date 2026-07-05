@@ -6,11 +6,13 @@ import type {
 } from "@/modules/education/server/payments/paymentGateway";
 import { PaymentError } from "@/modules/education/constants/errors";
 
-// Stripe implementation — STUB. Activating requires `npm i stripe` plus
-// STRIPE_SECRET_KEY / STRIPE_WEBHOOK_SECRET in .env.
-//
-// Kept behind the PaymentGateway interface so nothing else in the module imports
-// Stripe. Replace the throws with Stripe Checkout Session + webhook verification.
+// ⚠️ DEPRECATED / REFERENCE-ONLY — NOT WIRED IN.
+// The active payment provider is Square (see `squareGateway.ts`). This Stripe
+// scaffold is kept only as a reference for what a second provider would look like
+// behind the PaymentGateway interface. Nothing imports `getPaymentGateway` from
+// this file. To revive Stripe: `npm i stripe`, add STRIPE_SECRET_KEY /
+// STRIPE_WEBHOOK_SECRET, implement the methods, and switch the import in
+// paymentService.ts + the webhook route back to this module.
 
 export class StripeGateway implements PaymentGateway {
   async createCheckout(_request: CheckoutRequest): Promise<CheckoutResult> {
