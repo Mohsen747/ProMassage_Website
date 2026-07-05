@@ -28,8 +28,19 @@ export async function getStudentProfile(id: string): Promise<StudentProfile> {
   return profile;
 }
 
-export async function updateProfile(_id: string, _input: ProfileUpdateInput): Promise<Student> {
-  throw new Error("studentService.updateProfile not implemented (scaffold)");
+/** Fresh student record straight from the DB (for /account/profile display). */
+export async function getStudent(id: string): Promise<Student> {
+  const student = await studentRepository.findStudentById(id);
+  if (!student) throw new NotFoundError("Student");
+  return student;
+}
+
+export async function updateProfile(id: string, input: ProfileUpdateInput): Promise<Student> {
+  return studentRepository.updateStudent(id, {
+    firstName: input.firstName,
+    lastName: input.lastName,
+    phone: input.phone ?? null,
+  });
 }
 
 export async function listStudents(): Promise<Student[]> {

@@ -10,6 +10,12 @@ export interface CreateStudentData {
   phone: string | null;
 }
 
+export interface UpdateStudentData {
+  firstName: string;
+  lastName: string;
+  phone: string | null;
+}
+
 /** Map a Prisma User row → the domain `Student` (drops auth-only fields). */
 function toStudent(row: PrismaUser): Student {
   return {
@@ -44,6 +50,14 @@ export async function findStudentByEmail(email: string): Promise<Student | null>
 export async function findStudentById(id: string): Promise<Student | null> {
   const row = await prisma.user.findUnique({ where: { id } });
   return row ? toStudent(row) : null;
+}
+
+export async function updateStudent(id: string, data: UpdateStudentData): Promise<Student> {
+  const row = await prisma.user.update({
+    where: { id },
+    data: { firstName: data.firstName, lastName: data.lastName, phone: data.phone },
+  });
+  return toStudent(row);
 }
 
 export async function findAllStudents(): Promise<Student[]> {
