@@ -93,3 +93,12 @@ export async function findAllPayments(): Promise<Payment[]> {
   const rows = await prisma.payment.findMany({ orderBy: { createdAt: "desc" } });
   return rows.map(toDomain);
 }
+
+/** Sum of all `paid` payment amounts in cents (admin revenue stat). */
+export async function sumPaidCents(): Promise<number> {
+  const result = await prisma.payment.aggregate({
+    _sum: { amountCents: true },
+    where: { status: "paid" },
+  });
+  return result._sum.amountCents ?? 0;
+}

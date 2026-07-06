@@ -66,16 +66,81 @@ export async function findPublishedSlugs(): Promise<string[]> {
   return rows.map((row) => row.slug);
 }
 
-// --- Admin CRUD (not part of the public-read slice — implemented later) ---
-
-export async function createCourse(_input: CourseInput, _createdById: string): Promise<Course> {
-  throw new Error("courseRepository.createCourse not implemented (scaffold)");
+/** Count courses, optionally restricted to published ones (admin dashboard). */
+export async function countCourses(publishedOnly: boolean): Promise<number> {
+  return prisma.course.count({ where: publishedOnly ? { published: true } : {} });
 }
 
-export async function updateCourse(_id: string, _input: CourseUpdateInput): Promise<Course> {
-  throw new Error("courseRepository.updateCourse not implemented (scaffold)");
+// --- Admin CRUD ---
+
+export async function createCourse(input: CourseInput, createdById: string): Promise<Course> {
+  const row = await prisma.course.create({
+    data: {
+      slug: input.slug,
+      name: input.name,
+      category: input.category,
+      theoryHours: input.theoryHours,
+      practicalHours: input.practicalHours,
+      // totalHours is derived — never trusted from the client.
+      totalHours: input.theoryHours + input.practicalHours,
+      priceGroup: input.priceGroup,
+      priceSemiIndividual: input.priceSemiIndividual,
+      priceIndividual: input.priceIndividual,
+      prerequisites: input.prerequisites,
+      description: input.description,
+      highlights: input.highlights,
+      tag: input.tag,
+      instructor: input.instructor,
+      published: input.published,
+      createdById,
+    },
+  });
+  return toDomain(row);
 }
 
-export async function deleteCourse(_id: string): Promise<void> {
-  throw new Error("courseRepository.deleteCourse not implemented (scaffold)");
+export async function updateCourse(id: string, input: CourseUpdateInput): Promise<Course> {
+  // Recompute the derived totalHours whenever either hours field changes.
+  let totalHours: number | undefined;
+  if (input.theoryHours !== undefined || input.practicalHours !== undefined) {
+    const current = await prisma.course.findUniqueOrThrow({
+      where: { id },
+      select: { theoryHours: true, practicalHours: true },
+    });
+    const theory = input.theoryHours ?? current.theoryHours;
+    const practical = input.practicalHours ?? current.practicalHours;
+    totalHours = theory + practical;
+  }
+
+  const row = await prisma.course.update({
+    where: { id },
+    data: {
+      ...(input.slug !== undefined ? { slug: input.slug } : {}),
+      ...(input.name !== undefined ? { name: input.name } : {}),
+      ...(input.category !== undefined ? { category: input.category } : {}),
+      ...(input.theoryHours !== undefined ? { theoryHours: input.theoryHours } : {}),
+      ...(input.practicalHours !== undefined ? { practicalHours: input.practicalHours } : {}),
+      ...(totalHours !== undefined ? { totalHours } : {}),
+      ...(input.priceGroup !== undefined ? { priceGroup: input.priceGroup } : {}),
+      ...(input.priceSemiIndividual !== undefined
+        ? { priceSemiIndividual: input.priceSemiIndividual }
+        : {}),
+      ...(input.priceIndividual !== undefined ? { priceIndividual: input.priceIndividual } : {}),
+      ...(input.prerequisites !== undefined ? { prerequisites: input.prerequisites } : {}),
+      ...(input.description !== undefined ? { description: input.description } : {}),
+      ...(input.highlights !== undefined ? { highlights: input.highlights } : {}),
+      ...(input.tag !== undefined ? { tag: input.tag } : {}),
+      ...(input.instructor !== undefined ? { instructor: input.instructor } : {}),
+      ...(input.published !== undefined ? { published: input.published } : {}),
+    },
+  });
+  return toDomain(row);
+}
+
+/**
+ * Hard-delete a course. Callers MUST ensure it has no enrollments first — the
+ * DB FK (Enrollment.course onDelete: Restrict) will otherwise reject the delete.
+ * The admin UI unpublishes (soft-delete) instead of calling this.
+ */
+export async function deleteCourse(id: string): Promise<void> {
+  await prisma.course.delete({ where: { id } });
 }

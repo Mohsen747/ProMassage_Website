@@ -1,4 +1,4 @@
-import type { Student, StudentProfile } from "@/modules/education/types/student";
+import type { Student, StudentListItem, StudentProfile } from "@/modules/education/types/student";
 import type { ProfileUpdateInput, SignupInput } from "@/modules/education/validators/studentSchema";
 import * as studentRepository from "@/modules/education/repositories/studentRepository";
 import { hashPassword } from "@/shared/auth/password";
@@ -43,6 +43,6 @@ export async function updateProfile(id: string, input: ProfileUpdateInput): Prom
   });
 }
 
-export async function listStudents(): Promise<Student[]> {
+export async function listStudents(): Promise<StudentListItem[]> {
   return studentRepository.findAllStudents();
 }

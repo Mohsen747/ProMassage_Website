@@ -1,7 +1,7 @@
 import type { Course, PublicCourse, CourseCategory } from "@/modules/education/types/course";
 import type { CourseInput, CourseUpdateInput, CourseFilter } from "@/modules/education/validators/courseSchema";
 import * as courseRepository from "@/modules/education/repositories/courseRepository";
-import { NotFoundError } from "@/modules/education/constants/errors";
+import { EducationError, NotFoundError } from "@/modules/education/constants/errors";
 
 // Course business logic. Public reads strip non-group pricing (CLAUDE.md rule:
 // only the group price is ever exposed on the website — surfaced as `fromPrice`).
@@ -62,20 +62,40 @@ export function partitionByCategory(courses: PublicCourse[]): PublicCoursesByCat
   };
 }
 
-// --- Admin (full record, all tiers) — implemented in a later slice ---
+// --- Admin (full record, all tiers) ---
 
 export async function listAllCourses(filter: CourseFilter): Promise<Course[]> {
   return courseRepository.findAllCourses(filter);
 }
 
+/** Full course record by id (admin edit view). Throws if not found. */
+export async function getCourse(id: string): Promise<Course> {
+  const course = await courseRepository.findCourseById(id);
+  if (!course) throw new NotFoundError("Course");
+  return course;
+}
+
 export async function createCourse(input: CourseInput, adminId: string): Promise<Course> {
+  const clash = await courseRepository.findCourseBySlug(input.slug);
+  if (clash) throw new EducationError("A course with that slug already exists", "SLUG_TAKEN");
   return courseRepository.createCourse(input, adminId);
 }
 
 export async function updateCourse(id: string, input: CourseUpdateInput): Promise<Course> {
   const existing = await courseRepository.findCourseById(id);
   if (!existing) throw new NotFoundError("Course");
+  if (input.slug && input.slug !== existing.slug) {
+    const clash = await courseRepository.findCourseBySlug(input.slug);
+    if (clash) throw new EducationError("A course with that slug already exists", "SLUG_TAKEN");
+  }
   return courseRepository.updateCourse(id, input);
+}
+
+/** Toggle publish state (soft-delete style — courses are never hard-deleted). */
+export async function setCoursePublished(id: string, published: boolean): Promise<Course> {
+  const existing = await courseRepository.findCourseById(id);
+  if (!existing) throw new NotFoundError("Course");
+  return courseRepository.updateCourse(id, { published });
 }
 
 export async function deleteCourse(id: string): Promise<void> {

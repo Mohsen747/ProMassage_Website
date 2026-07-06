@@ -1,5 +1,6 @@
 "use server";
 
+import { z } from "zod";
 import { courseInputSchema, courseUpdateSchema } from "@/modules/education/validators/courseSchema";
 import * as courseService from "@/modules/education/services/courseService";
 import type { Course } from "@/modules/education/types/course";
@@ -25,6 +26,21 @@ export async function updateCourseAction(id: string, input: unknown): Promise<Ac
     schema: courseUpdateSchema,
     input,
     handler: (data) => courseService.updateCourse(id, data),
+  });
+}
+
+const setPublishedSchema = z.object({ published: z.boolean() });
+
+// One-click publish/unpublish toggle (soft-delete style) for /admin/courses.
+export async function setCoursePublishedAction(
+  id: string,
+  published: boolean
+): Promise<ActionResult<Course>> {
+  await requireRole("admin");
+  return runAction({
+    schema: setPublishedSchema,
+    input: { published },
+    handler: ({ published: next }) => courseService.setCoursePublished(id, next),
   });
 }
 

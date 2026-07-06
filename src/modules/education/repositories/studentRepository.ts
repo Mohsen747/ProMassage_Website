@@ -1,6 +1,6 @@
 import { prisma } from "@/shared/db/prismaClient";
 import type { User as PrismaUser } from "@prisma/client";
-import type { Student, StudentProfile } from "@/modules/education/types/student";
+import type { Student, StudentListItem, StudentProfile } from "@/modules/education/types/student";
 
 export interface CreateStudentData {
   email: string;
@@ -60,11 +60,44 @@ export async function updateStudent(id: string, data: UpdateStudentData): Promis
   return toStudent(row);
 }
 
-export async function findAllStudents(): Promise<Student[]> {
-  throw new Error("studentRepository.findAllStudents not implemented (scaffold)");
+/** All students (role=student), newest first, each with its enrollment count. */
+export async function findAllStudents(): Promise<StudentListItem[]> {
+  const rows = await prisma.user.findMany({
+    where: { role: "student" },
+    orderBy: { createdAt: "desc" },
+    include: { _count: { select: { enrollments: true } } },
+  });
+  return rows.map((row) => ({ ...toStudent(row), enrollmentCount: row._count.enrollments }));
+}
+
+/** Count of student-role users (admin dashboard). */
+export async function countStudents(): Promise<number> {
+  return prisma.user.count({ where: { role: "student" } });
 }
 
 /** Aggregated profile for /admin/students/[id]. */
-export async function getStudentProfile(_id: string): Promise<StudentProfile | null> {
-  throw new Error("studentRepository.getStudentProfile not implemented (scaffold)");
+export async function getStudentProfile(id: string): Promise<StudentProfile | null> {
+  const user = await prisma.user.findUnique({
+    where: { id },
+    include: { _count: { select: { enrollments: true, certificates: true } } },
+  });
+  if (!user) return null;
+
+  const [activeEnrollmentCount, completedEnrollmentCount, paid] = await Promise.all([
+    prisma.enrollment.count({ where: { studentId: id, status: "active" } }),
+    prisma.enrollment.count({ where: { studentId: id, status: "completed" } }),
+    prisma.payment.aggregate({
+      _sum: { amountCents: true },
+      where: { studentId: id, status: "paid" },
+    }),
+  ]);
+
+  return {
+    ...toStudent(user),
+    enrollmentCount: user._count.enrollments,
+    activeEnrollmentCount,
+    completedEnrollmentCount,
+    totalPaidCents: paid._sum.amountCents ?? 0,
+    certificateCount: user._count.certificates,
+  };
 }

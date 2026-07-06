@@ -34,3 +34,8 @@ export async function getSessionAttendance(sessionId: string): Promise<Attendanc
 export async function getEnrollmentAttendance(enrollmentId: string): Promise<Attendance[]> {
   return attendanceRepository.findAttendanceByEnrollment(enrollmentId);
 }
+
+/** All attendance for a student (admin student detail). */
+export async function getStudentAttendance(studentId: string): Promise<Attendance[]> {
+  return attendanceRepository.findAttendanceByStudent(studentId);
+}

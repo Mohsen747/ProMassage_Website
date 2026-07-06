@@ -73,6 +73,11 @@ export async function findEnrollments(filter: EnrollmentFilter): Promise<Enrollm
   return rows.map(toDomain);
 }
 
+/** Count all enrollments in a given status (admin dashboard). */
+export async function countEnrollmentsByStatus(status: EnrollmentStatus): Promise<number> {
+  return prisma.enrollment.count({ where: { status } });
+}
+
 export async function countActiveEnrollmentsForIntake(intakeId: string): Promise<number> {
   return prisma.enrollment.count({
     where: { intakeId, status: { in: SEAT_HOLDING_STATUSES } },
