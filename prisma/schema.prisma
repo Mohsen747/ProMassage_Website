@@ -53,6 +53,9 @@ model User {
   accounts Account[]
   sessions Session[]
 
+  // Password reset (credentials flow — see PasswordResetToken)
+  passwordResetTokens PasswordResetToken[]
+
   @@index([role])
 }
 
@@ -97,6 +100,26 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// Password reset (credentials login) — one-time, expiring, single-use tokens.
+// Only the SHA-256 hash of the token is stored; the raw token lives solely in
+// the emailed link, so a database read cannot be used to reset anyone's
+// password. A token is spent when `usedAt` is set; expiry is `expiresAt`.
+// ---------------------------------------------------------------------------
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 // ---------------------------------------------------------------------------

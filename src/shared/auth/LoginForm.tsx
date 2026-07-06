@@ -4,11 +4,15 @@ import { useState, type FormEvent } from "react";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "@/i18n/navigation";
 import { authRoutes } from "@/shared/auth/routes";
+import { Link } from "@/i18n/navigation";
+import FormAlert from "@/shared/auth/FormAlert";
 import Button from "@/components/ui/Button";
 
 interface LoginFormProps {
   /** Optional deep-link to return to after login (set by the route guard). */
   callbackUrl?: string;
+  /** Optional one-off success notice (e.g. after a password reset). */
+  notice?: string;
 }
 
 // Input/label styling mirrors the site's ContactForm for a consistent look.
@@ -16,7 +20,7 @@ const inputClass =
   "w-full rounded-sm border border-stone-300 bg-white px-4 py-3 text-stone-900 placeholder:text-stone-400 transition focus:border-transparent focus:outline-none focus:ring-2 focus:ring-brand-500";
 const labelClass = "mb-1.5 block text-sm font-medium text-stone-700";
 
-export default function LoginForm({ callbackUrl }: LoginFormProps) {
+export default function LoginForm({ callbackUrl, notice }: LoginFormProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -47,14 +51,8 @@ export default function LoginForm({ callbackUrl }: LoginFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      {error ? (
-        <p
-          role="alert"
-          className="rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-        >
-          {error}
-        </p>
-      ) : null}
+      {notice ? <FormAlert tone="success">{notice}</FormAlert> : null}
+      {error ? <FormAlert tone="error">{error}</FormAlert> : null}
 
       <div>
         <label htmlFor="email" className={labelClass}>
@@ -72,9 +70,17 @@ export default function LoginForm({ callbackUrl }: LoginFormProps) {
       </div>
 
       <div>
-        <label htmlFor="password" className={labelClass}>
-          Password
-        </label>
+        <div className="mb-1.5 flex items-baseline justify-between">
+          <label htmlFor="password" className="text-sm font-medium text-stone-700">
+            Password
+          </label>
+          <Link
+            href="/forgot-password"
+            className="text-sm font-medium text-brand-forest underline underline-offset-4 hover:text-brand-700"
+          >
+            Forgot password?
+          </Link>
+        </div>
         <input
           id="password"
           name="password"

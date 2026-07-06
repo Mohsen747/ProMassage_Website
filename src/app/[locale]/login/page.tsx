@@ -10,10 +10,15 @@ export const metadata: Metadata = { title: "Log in" };
 
 interface PageProps {
   params: { locale: string };
-  searchParams: { callbackUrl?: string };
+  searchParams: { callbackUrl?: string; reset?: string };
 }
 
 export default function LoginPage({ searchParams }: PageProps) {
+  const notice =
+    searchParams.reset === "success"
+      ? "Your password has been reset. Please log in with your new password."
+      : undefined;
+
   return (
     <AuthCard
       title="Welcome back"
@@ -30,7 +35,7 @@ export default function LoginPage({ searchParams }: PageProps) {
         </>
       }
     >
-      <LoginForm callbackUrl={searchParams.callbackUrl} />
+      <LoginForm callbackUrl={searchParams.callbackUrl} notice={notice} />
     </AuthCard>
   );
 }

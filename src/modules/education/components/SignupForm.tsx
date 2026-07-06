@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "@/i18n/navigation";
 import { signupAction } from "@/modules/education/server/actions/authActions";
 import { authRoutes } from "@/shared/auth/routes";
+import FormAlert from "@/shared/auth/FormAlert";
 import Button from "@/components/ui/Button";
 
 interface SignupFormProps {
@@ -70,14 +71,7 @@ export default function SignupForm({ className }: SignupFormProps) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className={`space-y-5 ${className ?? ""}`}>
-      {formError ? (
-        <p
-          role="alert"
-          className="rounded-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-        >
-          {formError}
-        </p>
-      ) : null}
+      {formError ? <FormAlert tone="error">{formError}</FormAlert> : null}
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
