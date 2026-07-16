@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 import Button from "@/components/ui/Button";
+import LtrText from "@/components/ui/LtrText";
 import AcademyPageHeader from "@/components/layout/AcademyPageHeader";
 import AcademySubNav from "@/components/layout/AcademySubNav";
 import FaqAccordion from "@/components/sections/FaqAccordion";
@@ -137,7 +138,7 @@ export default async function EnrollPage() {
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    {t("contact.location")}
+                    <LtrText>{t("contact.location")}</LtrText>
                   </div>
                   <Button href="/contact" variant="spa" fullWidth>
                     {t("contact.consultation")}

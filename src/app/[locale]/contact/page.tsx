@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import ClinicPageHeader from "@/components/layout/ClinicPageHeader";
 import { siteConfig } from "@/config/site";
 import ContactForm from "@/components/sections/ContactForm";
+import LtrText from "@/components/ui/LtrText";
 
 export async function generateMetadata({
   params: { locale },
@@ -51,7 +52,7 @@ export default async function ContactPage() {
                   <span className="mt-0.5 text-brand-500 text-sm select-none font-medium w-24 shrink-0 md:w-28">
                     {tCommon("location")}
                   </span>
-                  <span className="text-stone-700 text-sm">{t("info.location")}</span>
+                  <LtrText className="text-stone-700 text-sm">{t("info.location")}</LtrText>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="mt-0.5 text-brand-500 text-sm select-none font-medium w-24 shrink-0 md:w-28">
@@ -76,7 +77,7 @@ export default async function ContactPage() {
                 <h2 className="font-serif text-xl text-stone-900 mb-3">{t("location.title")}</h2>
                 <p className="text-stone-600 text-sm leading-relaxed mb-6">{t("location.text")}</p>
                 <Button
-                  href="https://maps.google.com/?q=Kirkland,+Quebec"
+                  href="https://maps.google.com/?q=30+Canvin+St,+Kirkland,+QC+H9H+4S4"
                   variant="linkLead"
                   target="_blank"
                   rel="noopener noreferrer"

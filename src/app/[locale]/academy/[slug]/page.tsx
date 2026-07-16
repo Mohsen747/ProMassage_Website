@@ -8,20 +8,24 @@ import AcademySubNav from "@/components/layout/AcademySubNav";
 import ProgramDetailAccordion from "@/components/sections/ProgramDetailAccordion";
 import { siteConfig } from "@/config/site";
 import { routing } from "@/i18n/routing";
-import { getAllProgramSlugs, getProgramBySlug } from "@/data/programs";
+import {
+  findPublicCourseBySlug,
+  getPublishedSlugs,
+} from "@/modules/education/services/courseService";
 
 type PageProps = {
   params: { locale: string; slug: string };
 };
 
 export async function generateStaticParams() {
+  const slugs = await getPublishedSlugs();
   return routing.locales.flatMap((locale) =>
-    getAllProgramSlugs().map((slug) => ({ locale, slug }))
+    slugs.map((slug) => ({ locale, slug }))
   );
 }
 
 export async function generateMetadata({ params: { locale, slug } }: PageProps): Promise<Metadata> {
-  const program = getProgramBySlug(slug);
+  const program = await findPublicCourseBySlug(slug);
   if (!program) {
     return {};
   }
@@ -34,7 +38,7 @@ export async function generateMetadata({ params: { locale, slug } }: PageProps):
 }
 
 export default async function ProgramDetailPage({ params: { slug } }: PageProps) {
-  const program = getProgramBySlug(slug);
+  const program = await findPublicCourseBySlug(slug);
   if (!program) {
     notFound();
   }
@@ -102,7 +106,7 @@ export default async function ProgramDetailPage({ params: { slug } }: PageProps)
               </span>
               <span className="text-stone-400">·</span>
               <span>
-                {tPrograms("card.fromPrice")} ${program.pricing.group.toLocaleString()}{" "}
+                {tPrograms("card.fromPrice")} ${program.fromPrice.toLocaleString()}{" "}
                 {tPrograms("card.currency")}
               </span>
             </div>

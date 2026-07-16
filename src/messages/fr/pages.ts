@@ -43,7 +43,7 @@ const enroll = {
   ],
   contact: {
     heading: "Nous joindre",
-    location: "Kirkland, Québec",
+    location: "30, rue Canvin, Kirkland (QC) H9H 4S4",
     consultation: "Réserver une consultation gratuite",
   },
   faq: {
@@ -279,7 +279,7 @@ const contact = {
   },
   info: {
     title: "Nous joindre",
-    location: "Kirkland, Québec",
+    location: "30, rue Canvin, Kirkland (QC) H9H 4S4",
   },
   formIntro:
     "Utilisez le formulaire ci-dessous pour une question avant réservation. Pour réserver le plus rapidement, utilisez le lien de réservation en ligne.",

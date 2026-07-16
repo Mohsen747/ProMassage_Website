@@ -3,14 +3,17 @@
 ## Project Overview
 
 **ProMassage Clinic & Academy** — a single Next.js website with two distinct audiences:
+...
 
-| Side | Audience | Purpose |
-|------|----------|---------|
-| **Clinic** | Massage clients | Book sessions, view services/pricing/about/FAQ/contact |
-| **Academy** | Massage students | Explore PROGRAMS, schedule, certification, enroll |
+---
 
-Both sides share the same Navbar, Footer, layout, and brand system. The Navbar is split left (Clinic) / center leaf logo / right (Academy) on desktop.
+## ⚠️ Development Rules — Read First
 
+All code in this project must follow the rules defined in **`CONTRIBUTING.md`**
+(project root). This includes file length limits, naming conventions, TypeScript-only
+policy, testing requirements, and the no-direct-production-push rule.
+
+**Before writing or editing any code, read `CONTRIBUTING.md` first.**
 ---
 
 ## Stack

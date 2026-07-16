@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import type { Program } from "@/data/programs";
+import type { PublicCourse } from "@/modules/education/types/course";
 
 type CourseCardProps = {
-  course: Program;
+  course: PublicCourse;
   accentBorder?: boolean;
 };
 
@@ -46,7 +46,7 @@ export default async function CourseCard({ course, accentBorder = false }: Cours
       <div className="flex shrink-0 flex-row items-center justify-between gap-4 border-t border-stone-100 pt-4 sm:flex-col sm:items-end sm:border-t-0 sm:pt-0">
         <p className="text-sm font-semibold text-stone-800 sm:text-end">
           {t("card.fromPrice")}{" "}
-          <span className="text-base">${course.pricing.group.toLocaleString()}</span>{" "}
+          <span className="text-base">${course.fromPrice.toLocaleString()}</span>{" "}
           <span className="font-normal text-stone-500">{t("card.currency")}</span>
         </p>
 

@@ -1,0 +1,488 @@
+/*
+ * ProMassage Academy — certificate document styles.
+ * Extracted verbatim from the approved standalone design (certificate-reference/
+ * styles.css). DO NOT restyle: these rules define the exact, final certificate.
+ * Only the certificate-scoped selectors live here — the standalone admin form /
+ * body styles are intentionally omitted so this file can be loaded on a single
+ * route (and inside the print iframe) without leaking into the rest of the site.
+ */
+
+:root {
+  --page-bg: #f8fafd;
+  --panel-bg: #ffffff;
+  --panel-border: #e2ebe6;
+  --text-primary: #1a4a2e;
+  --text-muted: #4a6b52;
+  --input-bg: #ffffff;
+  --input-border: #d4e0d8;
+  --input-focus: #7cb866;
+  --green-dark: #1a4a2e;
+  --green-mid: #2d6a40;
+  --green-light: #4a8a5a;
+  --green-fresh: #7cb866;
+  --green-accent: #5aaa6a;
+  --brand-green: #6b8c3e;
+  --brand-green-light: #8faa58;
+  --brand-green-dark: #5a7a32;
+  --cream: #FDFCF9;
+  --cream-dark: #ede8d8;
+  --gold: #c8a84b;
+}
+
+/* Scoped reset — the print iframe loads ONLY this file (no Tailwind preflight),
+   so the certificate must carry its own box-model/reset. Wrapped in :where() so
+   it has ZERO specificity: it sets the box model but NEVER overrides the design's
+   own margins/padding (plain class selectors), exactly like the original bare `*`
+   reset. Using `#certificate *` directly here would raise specificity to ID level
+   and silently clobber every .cert-* margin/padding — collapsing the layout. */
+:where(.cert-scale-viewport, #cert-container, #certificate, #certificate *) {
+  box-sizing: border-box;
+}
+:where(#certificate, #certificate *) {
+  margin: 0;
+  padding: 0;
+}
+
+/* ── PRINT / SAVE BUTTON (kept from the original admin panel, unchanged) ── */
+.btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 11px 28px;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(26, 74, 46, 0.18);
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 74, 46, 0.22);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--green-mid);
+  color: var(--green-dark);
+}
+
+.btn-secondary:hover {
+  background: rgba(124, 184, 102, 0.12);
+  border-color: var(--green-light);
+}
+
+.print-hint {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  font-family: 'Lato', sans-serif;
+}
+
+.print-hint strong {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+/* ── CERTIFICATE WRAPPER ── */
+.cert-wrapper {
+  width: 100%;
+  max-width: 1123px;
+}
+
+.cert-scale-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.cert-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#cert-container {
+  width: 1122px;
+  height: 867px;
+  transform-origin: top left;
+  transform: scale(var(--cert-preview-scale, 1));
+}
+
+/* ── CERTIFICATE (fixed design canvas — US Letter landscape 1122×867, ratio 22:17 = 11:8.5) ── */
+#certificate {
+  width: 1122px;
+  height: 867px;
+  container-type: inline-size;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(26, 74, 46, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* ── CABINET PANEL FRAME ── */
+.cert-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── CORNER SWOOSH — band covers frame in corner; arc sits above frame ── */
+.dec-corner {
+  position: absolute;
+  width: 38%;
+  height: 65%;
+  display: block;
+  pointer-events: none;
+}
+.dec-corner-band { z-index: 2; }
+.dec-corner-arc  { z-index: 3; }
+.dec-corner-bl { bottom: 0; left: 0; }
+.dec-corner-tr { top: -1px; right: -1px; }
+
+/* ── CONTENT ── */
+.cert-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 3.5% 8% 3%;
+  flex: 1;
+}
+
+/* Logo area */
+.cert-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.2%;
+}
+
+.cert-logo img {
+  width: 13%;
+  min-width: 96px;
+  height: auto;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.cert-brand {
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(14px, 2.4cqw, 28px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  background: linear-gradient(
+    180deg,
+    var(--brand-green-light) 0%,
+    var(--brand-green) 42%,
+    var(--brand-green-dark) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--brand-green);
+}
+
+.cert-brand-sub {
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(8px, 1.1cqw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  line-height: 1.2;
+  background: linear-gradient(
+    180deg,
+    var(--brand-green-light) 0%,
+    var(--brand-green) 50%,
+    var(--brand-green-dark) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--brand-green);
+}
+
+/* Title block — CERTIFICATE + OF COMPLETION */
+.cert-heading {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 1.35%;
+  text-align: center;
+}
+
+.cert-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 6.2cqw, 68px);
+  font-weight: 600;
+  color: #1e3d20;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  margin-bottom: 0.175em;
+  text-transform: uppercase;
+}
+
+.cert-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.4cqw, 16px);
+  width: 100%;
+}
+
+.cert-line {
+  flex: 1;
+  min-width: 24px;
+  height: 1px;
+  background: #5aaa6a;
+}
+
+.cert-subtitle {
+  flex-shrink: 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(14px, 2cqw, 22px);
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  color: #6a6a6a;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cert-presented {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(6px, 0.85cqw, 9px);
+  letter-spacing: 3px;
+  color: var(--green-mid);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.6%;
+}
+
+/* Name area */
+.cert-name-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 86%;
+  margin-bottom: clamp(4px, 0.5cqw, 8px);
+}
+
+.cert-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14px, 2.9cqw, 36px);
+  font-weight: 600;
+  color: var(--green-dark);
+  letter-spacing: 2px;
+  padding: 2px 0 4px;
+  min-height: 1.4em;
+  text-align: center;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.cert-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.2cqw, 14px);
+  width: 70%;
+  margin-bottom: clamp(4px, 0.5cqw, 8px);
+}
+
+.cert-divider-line {
+  flex: 1;
+  min-width: 24px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--brand-green-dark) 0%,
+    var(--brand-green) 32%,
+    var(--brand-green-light) 50%,
+    var(--brand-green) 68%,
+    var(--brand-green-dark) 100%
+  );
+  box-shadow: 0 0 1px rgba(107, 140, 62, 0.35);
+}
+
+.cert-divider-logo {
+  flex-shrink: 0;
+  width: clamp(14px, 1.8cqw, 22px);
+  height: auto;
+  display: block;
+  opacity: 0.85;
+}
+
+.cert-completing {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(6px, 0.85cqw, 9px);
+  letter-spacing: 3px;
+  color: var(--green-mid);
+  text-transform: uppercase;
+  margin-bottom: 0.4%;
+  text-align: center;
+}
+
+.cert-course {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(13.2px, 2.16cqw, 24px);
+  font-weight: 600;
+  color: var(--green-dark);
+  letter-spacing: 1px;
+  margin-bottom: 1%;
+  text-align: center;
+  font-style: italic;
+}
+
+.cert-body-text {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(7.2px, 0.936cqw, 10.2px);
+  color: #555;
+  text-align: center;
+  line-height: 1.7;
+  margin-bottom: 1.5%;
+}
+
+/* Footer — left: signature | center: seal | right: date + ID (shared row for signature line) */
+.cert-footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto auto auto;
+  align-items: end;
+  width: 88%;
+  margin-top: auto;
+  padding-bottom: 3%;
+}
+
+.cert-footer-director,
+.cert-footer-right {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  justify-items: center;
+  text-align: center;
+}
+
+.cert-footer-director {
+  justify-self: start;
+}
+
+.cert-footer-center {
+  grid-row: span 3;
+  justify-self: center;
+  align-self: end;
+  display: flex;
+  align-items: flex-end;
+}
+
+.cert-footer-right {
+  justify-self: end;
+}
+
+.cert-footer-above-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  line-height: 0;
+  width: 100%;
+}
+
+.cert-footer-right .cert-footer-above-line {
+  gap: 3px;
+  line-height: normal;
+  padding-bottom: 4px;
+}
+
+.cert-footer-below-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+}
+
+.cert-director-name {
+  margin-top: 2px;
+}
+
+.cert-sig-img {
+  width: clamp(60px, 9cqw, 110px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.cert-footer-director .cert-sig-img {
+  width: clamp(72px, 10.8cqw, 132px);
+  margin-bottom: -12px;
+}
+
+.cert-sig-line {
+  width: clamp(96px, 14.4cqw, 168px);
+  height: 1px;
+  background: var(--green-dark);
+}
+
+.cert-footer-label {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(6px, 0.9cqw, 10px);
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: var(--green-dark);
+  text-transform: uppercase;
+}
+
+.cert-footer-value {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(6px, 0.85cqw, 9.5px);
+  letter-spacing: 1px;
+  color: var(--green-mid);
+  margin-top: 1px;
+}
+
+/* Director + date/ID — same typography as signature block */
+.cert-footer-director .cert-footer-label,
+.cert-footer-director .cert-footer-value,
+.cert-footer-right .cert-footer-label,
+.cert-footer-right .cert-footer-value {
+  font-size: clamp(7.2px, 1.02cqw, 11.4px);
+}
+
+.cert-seal {
+  width: clamp(66px, 9.6cqw, 108px);
+  height: clamp(66px, 9.6cqw, 108px);
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Print is handled via a dedicated iframe in the client component (certificate-only, US Letter landscape). */

@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "Where is ProMassage located?",
     answer:
-      "ProMassage is located in Kirkland, Quebec, and welcomes clients looking for professional therapeutic massage in the surrounding area.",
+      "ProMassage is located at 30 Canvin St, Kirkland, QC H9H 4S4, and welcomes clients looking for professional therapeutic massage in the surrounding area.",
   },
   {
     question: "Is massage only for relaxation?",
