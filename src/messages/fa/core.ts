@@ -38,7 +38,7 @@ const core = {
     bookNow: "رزرو نوبت",
     attributionLeadIn: "طراحی توسط",
     attributionLabel: "donya Innovation",
-    location: "کرکلند ، کبک",
+    location: "30 Canvin St, Kirkland, QC H9H 4S4",
     bookingLine: "رزرو آنلاین فعال است",
   },
   brand: {

@@ -38,7 +38,7 @@ const core = {
     bookNow: "Book Now",
     attributionLeadIn: "All designed by",
     attributionLabel: "donya Innovation",
-    location: "Kirkland, Quebec",
+    location: "30 Canvin St, Kirkland, QC H9H 4S4",
     bookingLine: "Online Booking Available",
   },
   brand: {

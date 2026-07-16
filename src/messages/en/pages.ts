@@ -42,7 +42,7 @@ const enroll = {
   ],
   contact: {
     heading: "Get in touch",
-    location: "Kirkland, Quebec",
+    location: "30 Canvin St, Kirkland, QC H9H 4S4",
     consultation: "Book a free consultation",
   },
   faq: {
@@ -278,7 +278,7 @@ const contact = {
   },
   info: {
     title: "Get in touch",
-    location: "Kirkland, Quebec",
+    location: "30 Canvin St, Kirkland, QC H9H 4S4",
   },
   formIntro:
     "Use the form below if you have a question before booking. For the fastest way to reserve your appointment, please use the online booking link.",

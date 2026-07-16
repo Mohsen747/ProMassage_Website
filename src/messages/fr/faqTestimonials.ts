@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "Où se trouve ProMassage ?",
     answer:
-      "ProMassage est situé à Kirkland, Québec, et accueille les clients recherchant une massothérapie thérapeutique professionnelle dans les environs.",
+      "ProMassage est situé au 30, rue Canvin, Kirkland (QC) H9H 4S4, et accueille les clients recherchant une massothérapie thérapeutique professionnelle dans les environs.",
   },
   {
     question: "Le massage sert-il seulement à se détendre ?",

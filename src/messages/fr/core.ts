@@ -38,7 +38,7 @@ const core = {
     bookNow: "Réserver",
     attributionLeadIn: "Conception par",
     attributionLabel: "donya Innovation",
-    location: "Kirkland, Québec",
+    location: "30, rue Canvin, Kirkland (QC) H9H 4S4",
     bookingLine: "Réservation en ligne disponible",
   },
   brand: {

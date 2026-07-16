@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import Button from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { navPaths } from "@/config/nav";
+import LtrText from "@/components/ui/LtrText";
 
 export default async function Footer() {
   const tNav = await getTranslations("nav");
@@ -70,7 +71,7 @@ export default async function Footer() {
               {tFooter("contactHeading")}
             </p>
             <address className="not-italic flex flex-col gap-2 text-sm text-stone-400">
-              <span>{tFooter("location")}</span>
+              <LtrText>{tFooter("location")}</LtrText>
               <span>{tFooter("bookingLine")}</span>
               <Button
                 href={siteConfig.ctas.bookingUrl}

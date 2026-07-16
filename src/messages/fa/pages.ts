@@ -42,7 +42,7 @@ const enroll = {
   ],
   contact: {
     heading: "ارتباط با ما",
-    location: "کرکلند ، کبک",
+    location: "30 Canvin St, Kirkland, QC H9H 4S4",
     consultation: "رزرو مشاوره رایگان",
   },
   faq: {
@@ -278,7 +278,7 @@ const contact = {
   },
   info: {
     title: "ارتباط با ما",
-    location: "کرکلند ، کبک",
+    location: "30 Canvin St, Kirkland, QC H9H 4S4",
   },
   formIntro:
     "اگر پیش از رزرو سؤالی دارید از فرم زیر استفاده کنید. برای سریع‌ترین رزرو، لطفاً از لینک رزرو آنلاین استفاده کنید.",
