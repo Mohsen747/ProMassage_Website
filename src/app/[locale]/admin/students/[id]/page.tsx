@@ -10,6 +10,7 @@ import * as attendanceService from "@/modules/education/services/attendanceServi
 import { listAllCourses } from "@/modules/education/services/courseService";
 import { NotFoundError } from "@/modules/education/constants/errors";
 import StatusBadge from "@/modules/education/components/account/StatusBadge";
+import CertificateCell from "@/modules/education/components/admin/CertificateCell";
 import {
   ENROLLMENT_STATUS_META,
   PAYMENT_STATUS_META,
@@ -45,6 +46,12 @@ export default async function AdminStudentDetailPage({ params: { id } }: PagePro
 
   const courseName = (courseId: string): string =>
     courses.find((course) => course.id === courseId)?.name ?? "Course";
+
+  // Certificates keyed by enrollmentId so each completed enrollment can show
+  // either an "Issue certificate" action or a link to the issued certificate.
+  const certificateByEnrollment = new Map(
+    certificates.map((certificate) => [certificate.enrollmentId, certificate])
+  );
 
   const stats = [
     { label: "Enrollments", value: String(profile.enrollmentCount) },
@@ -87,7 +94,7 @@ export default async function AdminStudentDetailPage({ params: { id } }: PagePro
         {enrollments.length === 0 ? (
           <Empty>No enrollments.</Empty>
         ) : (
-          <Table head={["Course", "Tier", "Amount due", "Status", "Enrolled"]}>
+          <Table head={["Course", "Tier", "Amount due", "Status", "Enrolled", "Certificate"]}>
             {enrollments.map((enrollment) => (
               <tr key={enrollment.id} className="text-stone-700">
                 <td className="px-5 py-3">
@@ -104,6 +111,13 @@ export default async function AdminStudentDetailPage({ params: { id } }: PagePro
                   <StatusBadge {...ENROLLMENT_STATUS_META[enrollment.status]} />
                 </td>
                 <td className="px-5 py-3 whitespace-nowrap">{formatDate(enrollment.enrolledAt)}</td>
+                <td className="px-5 py-3">
+                  <CertificateCell
+                    enrollmentId={enrollment.id}
+                    status={enrollment.status}
+                    certificate={certificateByEnrollment.get(enrollment.id)}
+                  />
+                </td>
               </tr>
             ))}
           </Table>

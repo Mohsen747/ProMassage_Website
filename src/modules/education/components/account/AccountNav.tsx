@@ -8,6 +8,7 @@ import SignOutButton from "@/shared/auth/SignOutButton";
 const LINKS = [
   { href: "/account", label: "Dashboard" },
   { href: "/account/courses", label: "My courses" },
+  { href: "/account/certificates", label: "Certificates" },
   { href: "/account/payments", label: "Payments" },
   { href: "/account/profile", label: "Profile" },
 ] as const;

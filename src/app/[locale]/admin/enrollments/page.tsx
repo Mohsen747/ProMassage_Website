@@ -3,10 +3,12 @@ import { Link } from "@/i18n/navigation";
 import { requireRole } from "@/shared/auth/session";
 import * as enrollmentService from "@/modules/education/services/enrollmentService";
 import * as studentService from "@/modules/education/services/studentService";
+import * as certificateService from "@/modules/education/services/certificateService";
 import { listAllCourses } from "@/modules/education/services/courseService";
 import type { EnrollmentStatus } from "@/modules/education/types/enrollment";
 import type { EnrollmentFilter } from "@/modules/education/validators/enrollmentSchema";
 import StatusBadge from "@/modules/education/components/account/StatusBadge";
+import CertificateCell from "@/modules/education/components/admin/CertificateCell";
 import {
   ENROLLMENT_STATUS_META,
   formatDate,
@@ -43,6 +45,12 @@ export default async function AdminEnrollmentsPage({ searchParams }: PageProps) 
     listAllCourses({ publishedOnly: false }),
     studentService.listStudents(),
   ]);
+
+  // Certificates for the listed enrollments, keyed by enrollmentId, so each row
+  // can offer "Issue certificate" (completed, none yet) or a link to view one.
+  const certificateByEnrollment = await certificateService.listCertificatesForEnrollments(
+    enrollments.map((enrollment) => enrollment.id)
+  );
 
   const courseName = (id: string): string =>
     courses.find((course) => course.id === id)?.name ?? "Course";
@@ -109,6 +117,7 @@ export default async function AdminEnrollmentsPage({ searchParams }: PageProps) 
                 <th className="px-5 py-3 font-medium">Amount</th>
                 <th className="px-5 py-3 font-medium">Status</th>
                 <th className="px-5 py-3 font-medium">Enrolled</th>
+                <th className="px-5 py-3 font-medium">Certificate</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-stone-100">
@@ -136,6 +145,13 @@ export default async function AdminEnrollmentsPage({ searchParams }: PageProps) 
                     <StatusBadge {...ENROLLMENT_STATUS_META[enrollment.status]} />
                   </td>
                   <td className="px-5 py-3 whitespace-nowrap">{formatDate(enrollment.enrolledAt)}</td>
+                  <td className="px-5 py-3">
+                    <CertificateCell
+                      enrollmentId={enrollment.id}
+                      status={enrollment.status}
+                      certificate={certificateByEnrollment.get(enrollment.id)}
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>
